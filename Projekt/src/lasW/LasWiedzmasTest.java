@@ -2,6 +2,7 @@ package lasW;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;
+import java.math.*;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -180,7 +181,8 @@ class LasWiedzmasTest {
 	
 	}
 	
-
-
-
+	
+	
+	
+	
 }

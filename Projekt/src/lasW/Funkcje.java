@@ -104,7 +104,7 @@ public class Funkcje {
 
 	}
 
-	public static void ustawianie_zajacow (int X,int Z,Mapa[][] map) {	//USTAWIENIE ZAJACOW W LOSOWYM MIEJSCU
+	public static void ustawianie_zajacow (int X,int Z,Mapa[][] map) {	//USTAWIENIE ZAJACOW W LOSOWYM MIEJSCU											
 		int miejsceY=-100;
 		int miejsceX=-100;
 		Random los = new Random();
@@ -190,11 +190,74 @@ public class Funkcje {
 		}
 		Funkcje.stan_aktualny(map,X,stan);
 		System.out.println("Zajace	Welociraptory	Krzewy rozkoszy		Terytorium Wiedzmy");
-		System.out.println(stan.zajace+"	"+stan.welociraptory+"		"+stan.krzewy_rozkoszy+"			"+stan.dom_wiedzmy+"\n\n\n");
-		//Funkcje.czekaj(1500);																												// ODKOMENTOWAC DLA SYMULAJCI
+		System.out.println(stan.zajace+"	"+stan.welociraptory+"		"+stan.krzewy_rozkoszy+"			"+stan.dom_wiedzmy+"\n");
+		System.out.println("Zjedzone zajace		Zabite zajace		Zjedzone owoce		Zdeptane krzewy		Zapite welociraptory");
+		System.out.println(stan.zjedzone_zajace+"			"+stan.zabite_zajace+"			"+stan.zjedzone_owoce+"			"+stan.zdeptane_krzewy+"			"+stan.zabite_welociraptory+"\n\n\n");
+		Funkcje.czekaj(500);																												
 		Funkcje.przewijanie();
 	}
 
+	
+	public static void UnBuffZajaca(Mapa[][]map,int X) {
+		for(int i=1;i<X+1;i++) {
+			for(int j=1;j<X+1;j++) {
+				if(map[i][j]instanceof BuforZajaca) {
+					map[i][j]=new Zajac();
+				}
+			}
+		}
+	}
+	
+	public static void UnBuffWelociraptora(Mapa[][]map,int X) {
+		for(int i=1;i<X+1;i++) {
+			for(int j=1;j<X+1;j++) {
+				if(map[i][j]instanceof BuforWelociraptora) {
+					map[i][j]=new Welociraptor();
+				}
+			}
+		}
+	}
+	
+	
+	public static int przypadek(int y, int x,Mapa[][] map) {	// 0 - brak ograniczen, 1 - ograniczenie z gory, 2 - lewy gorny rog, 3- prawy gorny rog, 4 - przy lewej scianie, 5 - lewy dolny rog
+		int przypadek = 0;										// 6 - przy prawej scianie, 7 - prawy dolny rog, 8 - dolna krawedz
+		int skraj = map.length-1;
+		
+		if(y==1) {
+			przypadek = 1;
+				if(x==1) {
+					przypadek = 2;
+				}
+				else if(x==skraj) {
+					przypadek = 3;
+				}
+		}
+		else if(x==1) {
+			przypadek = 4;
+				if(y==skraj) {
+					przypadek = 5;
+				}
+		}
+		
+		else if (x==skraj) {
+			przypadek=6;
+				if(y==skraj) {
+					przypadek=7;
+				}
+		}
+		else if(y==skraj) {
+			przypadek=8;
+		}
+		
+		return przypadek;
+	}
+	
+	
+	
+	
+	
+	
+	
 //////////////////////////////////////////////////////////////////////////////TO BEDZIE W INTERFACE ! PO SKONCZENIU USUNAC
 public static void epoka(Mapa[][] map, int X, int O, int P, int PZ, int PW) {
 Welociraptor WEL = new Welociraptor();
@@ -251,22 +314,35 @@ PW=50;
 
 
 		*/	
-/// NA BRUDNO RUCH 			
-
+/// NA BRUDNO RUCH 
+/*
+	stan.zabite_welociraptory=0;
+	stan.zabite_zajace=0;
+	stan.zjedzone_zajace=0;
+	stan.zdeptane_krzewy=0;
+	stan.zjedzone_owoce=0;
+	*/
 for(int i=1;i<X+2;i++) {
 	for(int j=1;j<X+2;j++) {
 		if(map[i][j]instanceof Zajac) {
-			ZAJ.wykonanie_ruchu(i, j, map);;
+			ZAJ.wykonanie_ruchu(i, j, map,stan);
 		}
 		else if(map[i][j]instanceof Welociraptor) {
-			
-			WEL.wykonanie_ruchu(i, j, map);
+			WEL.wykonanie_ruchu(i, j, map,stan);
 		}
 	}	
-	
 }
-Funkcje.wyswietlenie_mapy(map, X);
+UnBuffZajaca(map,X);
+UnBuffWelociraptora(map,X);
 
+for(int i=1;i<X+2;i++) {
+	for(int j=1;j<X+2;j++) {
+		if(map[i][j]instanceof Welociraptor) {
+			WEL.wykonanie_ruchu(i, j, map, stan);
+		}
+	}	
+}
+UnBuffWelociraptora(map,X);
 
 }
 
