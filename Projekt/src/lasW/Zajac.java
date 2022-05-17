@@ -5,29 +5,35 @@ import java.util.Random;
 class Zajac extends Ruchome{
 
 	@Override
-	protected boolean czy_miejsce_na_rozmnozenie(int rozmiar, Mapa[][] map){
+	protected boolean czy_miejsce_na_rozmnozenie(int rozmiar, Mapa[][] map, int ilosc){
+		int ile_pustych=0;
 		for(int i=1;i<rozmiar+1;i++) {
 			for(int j=1;j<rozmiar+1;j++) {
 				if(map[i][j] instanceof Puste) {
-					return true;
+					ile_pustych++;
 				}
 			}
 		}
-		return false;
+		if(ile_pustych>=ilosc) {
+			return true;
+		}
+		else	return false;
 	}
 
 	@Override
 	public void rozmnozenie(int Rozmiar, Mapa[][] map ,int y, int x,int ilosc) {	 // ILOSC TO LICZBA MLODYCH W MIOCIE (NA RAZIE 1, NIE MA W PLANACH ZMIANY, ALE KTO WIE) 
 			
-		for(int i=0;i<ilosc;i++) {
-				if(czy_miejsce_na_rozmnozenie(Rozmiar,map)) {
+		
+				if(czy_miejsce_na_rozmnozenie(Rozmiar,map,ilosc)) {
 				int miejsceY=-100;
 				int miejsceX=-100;
 				Random los = new Random();
-				int koniec=-1;
+				
 				double szansa = los.nextDouble();
 			
 				if(szansa>0.5) {
+					for(int i=0;i<ilosc;i++) {
+						int koniec=-1;
 				while(koniec!=0) {
 					 miejsceY = los.nextInt(Rozmiar)+1;
 					 miejsceX = los.nextInt(Rozmiar)+1;
@@ -37,7 +43,7 @@ class Zajac extends Ruchome{
 				}
 			}
 			}
-			}
+				}
 		}
 	}
 
@@ -56,7 +62,7 @@ class Zajac extends Ruchome{
 
 	@Override
 	boolean czy_jedzenie(int y, int x, Mapa[][] map) {
-		for(int i=y-1;i<=y+1;y++) {
+		for(int i=y-1;i<=y+1;i++) {
 			for(int j=x-1;j<=x+1;j++) {
 				if(map[i][j] instanceof OwocRozkoszy) {
 					return true;
@@ -80,13 +86,13 @@ class Zajac extends Ruchome{
 			Random los = new Random();
 			int koniec=-1;
 			map[y][x]=new Puste();
-			/*	if(czy_jedzenie(y,x,map)) {												//JEZELI JEST JEDZENIE W POBLIZU TO POJDZIE DO JEDZENIA
+				if(czy_jedzenie(y,x,map)) {												//JEZELI JEST JEDZENIE W POBLIZU TO POJDZIE DO JEDZENIA
 																		     	//(JAK JEST KILKA TO DO LOSOWEGO)
 				while(koniec!=0) {
 					miejsceY = los.nextInt(3)-1;										
 					miejsceX = los.nextInt(3)-1;
-					if(map[y+miejsceY][x+miejsceX] instanceof OwocRozkoszy) {			//DO POPRAWY
-						map[y+miejsceY][x+miejsceX] = new BuforZajaca();
+					if(map[y+miejsceY][x+miejsceX] instanceof OwocRozkoszy) {			
+						map[y+miejsceY][x+miejsceX] = new NajedzonyZajac();
 						map[y][x]=new Puste();
 						koniec=0;
 						zjadl_w_tej_rundzie++;
@@ -95,7 +101,7 @@ class Zajac extends Ruchome{
 
 
 			}																//JAK NIE MA JEDZENIA TO IDZIE W LOSOWE
-			 else*/ {														// SA 2 MOZLIWOSCI - PUSTE ALBO WIEDZMA
+			  {														// SA 2 MOZLIWOSCI - PUSTE ALBO WIEDZMA
 								
 				
 				 
@@ -154,7 +160,7 @@ class Zajac extends Ruchome{
 					
 					
 					if(miejsceY!=0 || miejsceX!=0) {
-					if(map[y+miejsceY][x+miejsceX] instanceof Puste) {
+					if(map[y+miejsceY][x+miejsceX] instanceof Puste || map[y+miejsceY][x+miejsceX] instanceof OwocRozkoszy) {
 						map[y+miejsceY][x+miejsceX] = new BuforZajaca();
 						map[y][x]=new Puste();
 						koniec=0;
@@ -164,17 +170,10 @@ class Zajac extends Ruchome{
 						stan.zabite_zajace++;
 						koniec=0;
 					}
-					else if (map[y+miejsceY][x+miejsceX] instanceof OwocRozkoszy) {
-						map[y+miejsceY][x+miejsceX]=new BuforZajaca();
-						map[y][x]=new Puste();
-						stan.zjedzone_owoce++;
-						koniec=0;
-					}
+
 					
 				}
 				}
-			
-
 
 		}
 
@@ -200,6 +199,4 @@ class Zajac extends Ruchome{
 		ilosc_ruchow=1;
 	}
 	
-
-
 }

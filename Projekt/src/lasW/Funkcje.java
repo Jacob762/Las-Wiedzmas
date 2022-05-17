@@ -145,6 +145,8 @@ public class Funkcje {
 		ustawianie_owocow(X,O,map);
 		ustawianie_zajacow(X,Z,map);
 		ustawianie_welociraptorow(X,W,map);
+
+
 	}
 
 
@@ -191,27 +193,33 @@ public class Funkcje {
 		Funkcje.stan_aktualny(map,X,stan);
 		System.out.println("Zajace	Welociraptory	Krzewy rozkoszy		Terytorium Wiedzmy");
 		System.out.println(stan.zajace+"	"+stan.welociraptory+"		"+stan.krzewy_rozkoszy+"			"+stan.dom_wiedzmy+"\n");
-		System.out.println("Zjedzone zajace		Zabite zajace		Zjedzone owoce		Zdeptane krzewy		Zapite welociraptory");
-		System.out.println(stan.zjedzone_zajace+"			"+stan.zabite_zajace+"			"+stan.zjedzone_owoce+"			"+stan.zdeptane_krzewy+"			"+stan.zabite_welociraptory+"\n\n\n");
-		Funkcje.czekaj(500);																												
+		//System.out.println("Zjedzone zajace		Zabite zajace		Zjedzone owoce		Zdeptane krzewy		Zapite welociraptory");
+		//System.out.println(stan.zjedzone_zajace+"			"+stan.zabite_zajace+"			"+stan.zjedzone_owoce+"			"+stan.zdeptane_krzewy+"			"+stan.zabite_welociraptory+"\n\n\n");
+		Funkcje.czekaj(300);																												
 		Funkcje.przewijanie();
 	}
 
 	
-	public static void UnBuffZajaca(Mapa[][]map,int X) {
+	public static void UnBuffZajaca(Mapa[][]map,int X,int co) {
 		for(int i=1;i<X+1;i++) {
 			for(int j=1;j<X+1;j++) {
 				if(map[i][j]instanceof BuforZajaca) {
+					map[i][j]=new Zajac();
+				}
+				else if(map[i][j]instanceof NajedzonyZajac && co!=0) {
 					map[i][j]=new Zajac();
 				}
 			}
 		}
 	}
 	
-	public static void UnBuffWelociraptora(Mapa[][]map,int X) {
+	public static void UnBuffWelociraptora(Mapa[][]map,int X,int co) {
 		for(int i=1;i<X+1;i++) {
 			for(int j=1;j<X+1;j++) {
-				if(map[i][j]instanceof BuforWelociraptora) {
+				if(map[i][j]instanceof BuforWelociraptora && co==0) {
+					map[i][j]=new Welociraptor();
+				}
+				else if(map[i][j]instanceof NajedzonyWelociraptor && co!=0) {
 					map[i][j]=new Welociraptor();
 				}
 			}
@@ -259,7 +267,7 @@ public class Funkcje {
 	
 	
 //////////////////////////////////////////////////////////////////////////////TO BEDZIE W INTERFACE ! PO SKONCZENIU USUNAC
-public static void epoka(Mapa[][] map, int X, int O, int P, int PZ, int PW) {
+public static void epoka(Mapa[][] map, int X, int O, int P, int PZ, int PW,int ZM) {
 Welociraptor WEL = new Welociraptor();
 Zajac ZAJ = new Zajac();
 OwocRozkoszy OWO= new OwocRozkoszy(); 
@@ -267,61 +275,19 @@ Zliczanie stan = new Zliczanie();
 Wiedzma WIE = new Wiedzma();
 Funkcje.stan_aktualny(map,X,stan);
 
-/*
-int ilosc_owocow_do_rozmnozenia = O-stan.krzewy_rozkoszy;
-OWO.rozmnozenie(X, map, 1, 1, ilosc_owocow_do_rozmnozenia);
+WIE.czy_wybuch(X, map, P);	// WYBUCH
 
-
-/////////////////// NA BRUDNO ROZMNAZANIE ZAJACA - DZIALA
-
-for(int i=1;i<X+2;i++) {
-for(int j=1;j<X+2;j++) {
-if(map[i][j]instanceof Zajac) {
-ZAJ.rozmnozenie(X, map, i, j, 1);
-}
-}
-}
-
-//////////////////////	NA BRUDNO ROZMNAZANIE WELOCIRAPTORA - DZIALA
-for(int i=1;i<X+2;i++) {
-for(int j=1;j<X+2;j++) {
-if(map[i][j]instanceof Welociraptor) {
-WEL.rozmnozenie(X, map, i, j, 1);
-}
-}
-}
-
-/////////////////////// WYBUCH WIEDZMY NA BRUDNO - DZIALA
-P=100;
-WIE.czy_wybuch(X, map, P);
-
-Funkcje.wyswietlenie_mapy(map, X);
-
-///////////////////// NA BRUDNO PRZEDAWKOWANIE ZAJACA
-PZ=50;
-PW=50;
-	for(int i=1;i<X+2;i++) {
-		for(int j=1;j<X+2;j++) {
-			if(map[i][j]instanceof Zajac) {
-				ZAJ.przedawkowanie(i, j, map, PZ);
-			}
-			else if(map[i][j]instanceof Welociraptor) {
-				WEL.przedawkowanie(i, j, map, PW);
-			}
+for(int i=1;i<X+2;i++) {		//PRZEDAWKOWANIA
+	for(int j=1;j<X+2;j++) {
+		if(map[i][j]instanceof Zajac) {
+			ZAJ.przedawkowanie(i, j, map, PZ);
+		}
+		else if(map[i][j]instanceof Welociraptor) {
+			WEL.przedawkowanie(i, j, map, PW);
 		}
 	}
+}
 
-
-
-		*/	
-/// NA BRUDNO RUCH 
-/*
-	stan.zabite_welociraptory=0;
-	stan.zabite_zajace=0;
-	stan.zjedzone_zajace=0;
-	stan.zdeptane_krzewy=0;
-	stan.zjedzone_owoce=0;
-	*/
 for(int i=1;i<X+2;i++) {
 	for(int j=1;j<X+2;j++) {
 		if(map[i][j]instanceof Zajac) {
@@ -332,8 +298,8 @@ for(int i=1;i<X+2;i++) {
 		}
 	}	
 }
-UnBuffZajaca(map,X);
-UnBuffWelociraptora(map,X);
+UnBuffZajaca(map,X,0);
+UnBuffWelociraptora(map,X,0);
 
 for(int i=1;i<X+2;i++) {
 	for(int j=1;j<X+2;j++) {
@@ -342,8 +308,26 @@ for(int i=1;i<X+2;i++) {
 		}
 	}	
 }
-UnBuffWelociraptora(map,X);
+UnBuffWelociraptora(map,X,0);
 
+
+	for(int i=1;i<X+1;i++) {
+		for(int j=1;j<X+1;j++) {
+			if(map[i][j]instanceof NajedzonyWelociraptor) {
+				WEL.rozmnozenie(X, map, i, j, 1);
+			}
+			else if(map[i][j]instanceof NajedzonyZajac) {
+				ZAJ.rozmnozenie(X, map, i, j, ZM);
+			}
+		}
+	}
+	UnBuffZajaca(map,X,1);
+	UnBuffWelociraptora(map,X,1);
+	int ilosc_owocow_do_rozmnozenia = O-stan.krzewy_rozkoszy;
+	OWO.rozmnozenie(X, map, 1, 1, ilosc_owocow_do_rozmnozenia);
+	
 }
 
+	
 }
+	

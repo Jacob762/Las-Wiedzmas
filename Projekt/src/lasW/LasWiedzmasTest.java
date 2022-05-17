@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 class LasWiedzmasTest {
+	boolean CP=false;
 	Wiedzma WIE = new Wiedzma();
 	Zajac ZAJ = new Zajac();
 	Welociraptor WEL = new Welociraptor();
@@ -28,7 +29,7 @@ class LasWiedzmasTest {
 			}
 		}
 	}
-	Assert.assertEquals(ilosc,(X+2)*(X+2));
+	Assert.assertEquals((X+2)*(X+2),ilosc);
 }
 
 	@Test
@@ -56,7 +57,7 @@ class LasWiedzmasTest {
 			}
 		}
 	}
-	Assert.assertEquals(ilosc,0);	// CZY W ODPOWIEDNIM MIEJSCU
+	Assert.assertEquals(0,ilosc);	// CZY W ODPOWIEDNIM MIEJSCU
 
 
 }
@@ -100,7 +101,7 @@ class LasWiedzmasTest {
 		}
 	}
 
-		Assert.assertEquals(ilosc,0);	// SPRAWDZAMY CZY W DOBRYM MIEJSCU (JEZELI BY BYL AGENT W OGRODZENIU TO ZLE)
+		Assert.assertEquals(0,ilosc);	// SPRAWDZAMY CZY W DOBRYM MIEJSCU (JEZELI BY BYL AGENT W OGRODZENIU TO ZLE)
 }
 	
 	
@@ -117,7 +118,7 @@ class LasWiedzmasTest {
 		Zliczanie stan=new Zliczanie();
 		Funkcje.stan_aktualny(mapa, X, stan);
 		
-		Assert.assertEquals(stan.dom_wiedzmy,0);
+		Assert.assertEquals(0,stan.dom_wiedzmy);
 	}
 	
 	@Test
@@ -146,8 +147,8 @@ class LasWiedzmasTest {
 			}
 		}
 		Funkcje.stan_aktualny(mapa, X, stan);
-		Assert.assertEquals(stan.welociraptory, 0);
-		Assert.assertEquals(stan.zajace, 0);
+		Assert.assertEquals(0, stan.welociraptory);
+		Assert.assertEquals(0, stan.zajace);
 	}
 	
 	
@@ -177,12 +178,151 @@ class LasWiedzmasTest {
 		
 		Funkcje.stan_aktualny(mapa, X, stan);
 		
-		Assert.assertEquals(stan.krzewy_rozkoszy, O);
+		Assert.assertEquals(O, stan.krzewy_rozkoszy);
 	
 	}
 	
 	
 	
+	@Test
+	
+	void test_ruchu_zajaca() {						//SPRAWDZANIE CZY ZAJAC SIE PRZEMIESZCZAJA
+		
+		//POZYCJA POCZATKOWA I KONCOWA
+		int Yp=-1,Yk=-1,Xp=-1,Xk=-1;
+		Zliczanie stan=new Zliczanie();
+		Random los=new Random();
+		int X,Z,W,O,D;
+		 X=los.nextInt(1000-10)+11;
+		 Z=1;
+		 W=0;
+		 O=0;
+		 D=0;
+		Mapa[][] mapa = new Mapa[X+2][X+2];
+		Funkcje.ustawienie_poczatkowe(mapa,X,Z,W,O,D);
+		
+		for(int i=0;i<X+2;i++) {						// SZUKANIE WSPOLRZEDNYCH POCZATKOWYCH
+			for (int j=0;j<X+2;j++) {
+				if(mapa[i][j]instanceof Zajac) {
+					Yp=i;
+					Xp=j;
+					break;
+				}
+			}
+		}
+
+		Epoka_Implementacja ruch = new Epoka_Implementacja(mapa, X, 0,  0, 0, 0,0, stan, 0,CP);
+		
+		for(int i=0;i<X+2;i++) {						// SZUKANIE WSPOLRZEDNYCH KONCOWYCH
+			for (int j=0;j<X+2;j++) {
+				if(mapa[i][j]instanceof Zajac) {
+					Yk=i;
+					Xk=j;
+					break;
+				}
+			}
+		}
+		double odleglosc = Math.sqrt((Math.pow((Yp-Yk),2)+(Math.pow((Xp-Xk),2))));	// LICZENIE ODLEGLOSCI EUKLIDESOWEJ
+	
+		if(odleglosc>0 && odleglosc<2) {											// JEZELI W PRZEDZIALE (0,2) TO OK
+			assert(true);
+		}
+		else {
+			assert(false);
+		}
+	
+		
+	}
+	
+	@Test
+	
+	void test_ruchu_welociraptora() {						//SPRAWDZANIE CZY WELOCIRAPTORY SIE PRZEMIESZCZAJA
+		
+		//POZYCJA POCZATKOWA I KONCOWA
+		int Yp=-1,Yk=-1,Xp=-1,Xk=-1;
+		Zliczanie stan=new Zliczanie();
+		Random los=new Random();
+		int X,Z,W,O,D;
+		 X=los.nextInt(1000-10)+11;
+		 Z=1;
+		 W=0;
+		 O=0;
+		 D=0;
+		Mapa[][] mapa = new Mapa[X+2][X+2];
+		Funkcje.ustawienie_poczatkowe(mapa,X,Z,W,O,D);
+		
+		for(int i=0;i<X+2;i++) {						// SZUKANIE WSPOLRZEDNYCH POCZATKOWYCH
+			for (int j=0;j<X+2;j++) {
+				if(mapa[i][j]instanceof Welociraptor) {
+					Yp=i;
+					Xp=j;
+					break;
+				}
+			}
+		}
+		
+		Epoka_Implementacja ruch = new Epoka_Implementacja(mapa, X, 0,  0, 0, 0,0, stan, 0,CP);
+		
+		for(int i=0;i<X+2;i++) {						// SZUKANIE WSPOLRZEDNYCH KONCOWYCH
+			for (int j=0;j<X+2;j++) {
+				if(mapa[i][j]instanceof Welociraptor) {
+					Yk=i;
+					Xk=j;
+					break;
+				}
+			}
+		}
+		double odleglosc = Math.sqrt((Math.pow((Yp-Yk),2)+(Math.pow((Xp-Xk),2))));	// LICZENIE ODLEGLOSCI EUKLIDESOWEJ
+	
+		if(odleglosc>=0 && odleglosc<3) {											// JEZELI W PRZEDZIALE <0,3) TO OK
+			assert(true);
+		}
+		else {
+			assert(false);
+		}
+	}
 	
 	
+	@Test
+	void test_zjadania_owocu() {						//SPRAWDZANIE CZY ZAJAC ZJE OWOC
+		
+		
+		Zliczanie stan=new Zliczanie();
+		Random los=new Random();
+		int X,Z,W,O,D;
+		 X=2;
+		 Z=1;
+		 W=0;
+		 O=1;
+		 D=0;
+		Mapa[][] mapa = new Mapa[X+2][X+2];
+		Funkcje.ustawienie_poczatkowe(mapa,X,Z,W,O,D);
+		Epoka_Implementacja ruch = new Epoka_Implementacja(mapa, X, 0,  0, 0, 0,0, stan, 0,CP);
+		Funkcje.stan_aktualny(mapa, X, stan);
+		
+		Assert.assertEquals(0, stan.krzewy_rozkoszy);
+	
+}
+
+	@Test
+	void test_zjadania_zajaca() {						//SPRAWDZANIE CZY WELOCIRAPTOR ZJE ZAJACA
+		
+		
+		Zliczanie stan=new Zliczanie();
+		Random los=new Random();
+		int X,Z,W,O,D;
+		 X=2;
+		 Z=1;
+		 W=1;
+		 O=0;
+		 D=0;
+		Mapa[][] mapa = new Mapa[X+2][X+2];
+		Funkcje.ustawienie_poczatkowe(mapa,X,Z,W,O,D);
+		Epoka_Implementacja ruch = new Epoka_Implementacja(mapa, X, 0,  0, 0, 0,0, stan, 0,CP);
+		Funkcje.stan_aktualny(mapa, X, stan);
+		
+		Assert.assertEquals(0, stan.zajace);
+	
+}
+
 }

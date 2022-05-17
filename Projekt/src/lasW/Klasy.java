@@ -18,11 +18,7 @@ class Zliczanie{
 		welociraptory=0;
 		krzewy_rozkoszy=0;
 		dom_wiedzmy=0;
-		zjedzone_zajace=0;
-		zabite_zajace=0;
-		zdeptane_krzewy=0;
-		zjedzone_owoce=0;
-		zabite_welociraptory=0;
+
 	}
 
 	Zliczanie(int zajace,int welociraptory,int krzewy_rozkoszy, int dom_wiedzmy){
@@ -30,11 +26,11 @@ class Zliczanie{
 		this.welociraptory=welociraptory;
 		this.krzewy_rozkoszy=krzewy_rozkoszy;
 		this.dom_wiedzmy=dom_wiedzmy*dom_wiedzmy;
-		zjedzone_zajace=0;
-		zabite_zajace=0;
-		zdeptane_krzewy=0;
-		zjedzone_owoce=0;
-		zabite_welociraptory=0;
+		this.zjedzone_zajace=0;
+		this.zabite_zajace=0;
+		this.zdeptane_krzewy=0;
+		this.zjedzone_owoce=0;
+		this.zabite_welociraptory=0;
 	}
 }
 
@@ -48,7 +44,7 @@ class Mapa {
 class Ogrodzenie extends Mapa{
 
 	Ogrodzenie(){
-		symbol="*";
+		super.symbol="*";
 	}
 }
 
@@ -90,9 +86,21 @@ class BuforWelociraptora extends Mapa{
 	}
 }
 
+class NajedzonyZajac extends Mapa{
+	NajedzonyZajac(){
+		symbol="@";
+	}
+}
+
+class NajedzonyWelociraptor extends Mapa{
+	NajedzonyWelociraptor(){
+		symbol="#";
+	}
+}
+
 
 abstract class Rozmnazalne extends Mapa{
-	abstract boolean czy_miejsce_na_rozmnozenie(int Rozmiar, Mapa[][] x);
+	abstract boolean czy_miejsce_na_rozmnozenie(int Rozmiar, Mapa[][] x, int ilsoc);
 
 	abstract void rozmnozenie(int Rozmiar, Mapa[][] map, int y, int x, int ilosc);
 

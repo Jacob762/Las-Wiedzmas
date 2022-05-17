@@ -5,6 +5,7 @@ public class Epoka_Implementacja implements Epoka {
 	Welociraptor WEL = new Welociraptor();
 	OwocRozkoszy OWO= new OwocRozkoszy(); 
 	Wiedzma WIE = new Wiedzma();
+	Zliczanie stan = new Zliczanie();
 	
 	@Override
 	public void wybuch_domu_wiedmy(int X, Mapa[][] map, int P) {
@@ -13,42 +14,35 @@ public class Epoka_Implementacja implements Epoka {
 	
 	
 	@Override
-	public void uzupelnienie_owocow(int X, Mapa[][] map, int O, Zliczanie stan) {
+	public void uzupelnienie_owocow(int X, Mapa[][] map, int O) {
 		Funkcje.stan_aktualny(map, X, stan);
-	int ilosc_owocow_do_rozmnozenia= O-stan.krzewy_rozkoszy;
-
-	OWO.rozmnozenie(X, map, 1, 1, ilosc_owocow_do_rozmnozenia);
+		int BO = O-stan.krzewy_rozkoszy;
+	OWO.rozmnozenie(X, map, 1, 1, BO);
 	}
 	
-	@Override
-	public void rozmnozenie_zajacow(int X, Mapa[][] map) {
-		Zajac ZAJ = new Zajac();
-		for(int i=1;i<X+2;i++) {
-			for(int j=1;j<X+2;j++) {
-				if(map[i][j]instanceof Zajac) {
-					ZAJ.rozmnozenie(X, map, i, j, 1);
-				}
-			}
-		}
-	}
-	
-	@Override
-	public void rozmnozenie_welociraptorow(int X, Mapa[][] map) {
 
-		for(int i=1;i<X+2;i++) {
-			for(int j=1;j<X+2;j++) {
-				if(map[i][j]instanceof Welociraptor) {
+	@Override
+	public void rozmnozenie(int X, Mapa[][] map, int ZM) {
+
+		for(int i=1;i<X+1;i++) {
+			for(int j=1;j<X+1;j++) {
+				if(map[i][j]instanceof NajedzonyWelociraptor) {
 					WEL.rozmnozenie(X, map, i, j, 1);
 				}
+				else if(map[i][j]instanceof NajedzonyZajac) {
+					ZAJ.rozmnozenie(X, map, i, j, ZM);
+				}
 			}
 		}
+		Funkcje.UnBuffZajaca(map,X,1);
+		Funkcje.UnBuffWelociraptora(map,X,1);
 	}
 	
 	@Override
 	public void przedawkowanie(int X,Mapa[][] map, int PZ, int PW) {
 		
 		
-		for(int i=1;i<X+2;i++) {
+		for(int i=1;i<X+2;i++) {		
 			for(int j=1;j<X+2;j++) {
 				if(map[i][j]instanceof Zajac) {
 					ZAJ.przedawkowanie(i, j, map, PZ);
@@ -63,16 +57,43 @@ public class Epoka_Implementacja implements Epoka {
 	
 	@Override
 	public void wykonanie_ruchow(int X,Mapa[][] map,Zliczanie stan) {
-		
+		for(int i=1;i<X+2;i++) {
+			for(int j=1;j<X+2;j++) {
+				if(map[i][j]instanceof Zajac) {
+					ZAJ.wykonanie_ruchu(i, j, map,stan);
+				}
+				else if(map[i][j]instanceof Welociraptor) {
+					WEL.wykonanie_ruchu(i, j, map,stan);
+				}
+			}	
+		}
+		Funkcje.UnBuffZajaca(map,X,0);
+		Funkcje.UnBuffWelociraptora(map,X,0);
+
+		for(int i=1;i<X+2;i++) {
+			for(int j=1;j<X+2;j++) {
+				if(map[i][j]instanceof Welociraptor) {
+					WEL.wykonanie_ruchu(i, j, map, stan);
+				}
+			}	
+		}
+		Funkcje.UnBuffWelociraptora(map,X,0);
+
 	}
 	
 	
-	@Override
-	public  void krok_epoki(Mapa[][] map, int X, int O, int P, int PZ, int PW,Zliczanie stan) {
+	
+	Epoka_Implementacja(Mapa[][] map, int X, int O, int P, int PZ, int PW,int ZM,Zliczanie stan,int i, boolean CP){
 		wybuch_domu_wiedmy(X,map,P);
-		uzupelnienie_owocow(X,map,O,stan);
-		rozmnozenie_zajacow(X,map);
-		rozmnozenie_welociraptorow(X,map);
+		uzupelnienie_owocow(X,map,O);
+		if(CP) {
+		System.out.println("START	EPOKA: "+(i+1));
+		Funkcje.wyswietlenie_mapy(map, X);
+		}
 		przedawkowanie(X,map,PZ,PW);
+		wykonanie_ruchow(X,map,stan);
+		rozmnozenie(X,map,ZM);
+
+	
 	}
 }
