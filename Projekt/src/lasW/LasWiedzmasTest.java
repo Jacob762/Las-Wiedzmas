@@ -14,7 +14,7 @@ class LasWiedzmasTest {
 	int X= los.nextInt(1000-10)+11;
 	int ilosc=0;
 	Mapa[][] mapa = new Mapa[X+2][X+2];
-	LasWiedzmas.ustawianie_mapy(X,mapa);
+	Funkcje.ustawianie_mapy(X,mapa);
 	for(int i=0;i<X+2;i++) {
 		for(int j=0;j<X+2;j++) {
 			if(mapa[i][j] instanceof Puste) {
@@ -31,8 +31,8 @@ class LasWiedzmasTest {
 	int X= los.nextInt(1000-10)+11;
 	int ilosc=0;
 	Mapa[][] mapa = new Mapa[X+2][X+2];
-	LasWiedzmas.ustawianie_mapy(X,mapa);
-	LasWiedzmas.budowa_ogrodzenia(X,mapa);
+	Funkcje.ustawianie_mapy(X,mapa);
+	Funkcje.budowa_ogrodzenia(X,mapa);
 	for(int i=0;i<X+2;i++) {
 		for(int j=0;j<X+2;j++) {
 			if(mapa[i][j] instanceof Ogrodzenie) {
@@ -68,8 +68,8 @@ class LasWiedzmasTest {
 		 O=los.nextInt(X/2);
 		 D=los.nextInt(X/2);
 		Mapa[][] mapa = new Mapa[X+2][X+2];
-		LasWiedzmas.ustawienie_poczatkowe(mapa,X,Z,W,O,D);
-		LasWiedzmas.stan_aktualny(mapa,X,stan);
+		Funkcje.ustawienie_poczatkowe(mapa,X,Z,W,O,D);
+		Funkcje.stan_aktualny(mapa,X,stan);
 		Zliczanie powinno_byc=new Zliczanie(Z,W,O,D);
 		Assert.assertEquals(powinno_byc.zajace,stan.zajace);
 		Assert.assertEquals(powinno_byc.dom_wiedzmy,stan.dom_wiedzmy);
