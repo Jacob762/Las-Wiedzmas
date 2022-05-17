@@ -8,7 +8,7 @@ public class Funkcje {
 			System.out.println("Niepoprawna wartosc X: "+X);
 			 System.exit(0);
 		}
-		
+
 		if(Z<0 || Z>(X*X)/2) {
 			System.out.println("Niepoprawna wartosc Z: "+Z);
 			 System.exit(0);
@@ -42,8 +42,8 @@ public class Funkcje {
 			 System.exit(0);
 		}
 	}
-	
-	
+
+
 	public static void ustawianie_mapy(int X,Mapa[][] map) {	// USTAWIENIE WSZYSTKICH PUL NA PUSTE
 		for(int i=0;i<X+2;i++) {
 			for(int j=0;j<X+2;j++) {
@@ -51,14 +51,14 @@ public class Funkcje {
 			}
 		}
 	}
-	
+
 	public static void budowa_ogrodzenia(int X,Mapa[][] map) {	//USTAWIENIE WSZYSTKICH POL OBRZEZNYCH NA OGRODZENIE
 		for(int k=0;k<X+2;k+=X+1) {
 			for(int i=0;i<X+2;i++) {
 			map[k][i]=new Ogrodzenie();
 		}
 	}
-		
+
 		for(int k=0;k<X+2;k+=X+1) {
 			for(int i=1;i<X+2;i++) {
 			map[i][k]=new Ogrodzenie();
@@ -78,20 +78,20 @@ public class Funkcje {
 			 miejsceY = los.nextInt(X-D+1)+1;
 			 miejsceX = los.nextInt(X-D+1)+1;
 		}
-		
-		
+
+
 		for(int i=0;i<D;i++) {
 			for(int j=0;j<D;j++) {
 				map[miejsceY+i][miejsceX+j] = new Wiedzma();
 			}
 		}
 	}
-	
+
 	public static void ustawianie_owocow (int X,int O,Mapa[][] map) {	//USTAWIENIE KRZEWOW ROZKOSZY W LOSOWYM MIEJSCU
 		int miejsceY=-100;
 		int miejsceX=-100;
 		Random los = new Random();
-	
+
 		for(int i=0;i<O;) {
 			 miejsceY = los.nextInt(X)+1;
 			 miejsceX = los.nextInt(X)+1;
@@ -100,15 +100,15 @@ public class Funkcje {
 			 i++;
 			 }
 		}
-		
-		
+
+
 	}
-	
+
 	public static void ustawianie_zajacow (int X,int Z,Mapa[][] map) {	//USTAWIENIE ZAJACOW W LOSOWYM MIEJSCU
 		int miejsceY=-100;
 		int miejsceX=-100;
 		Random los = new Random();
-	
+
 		for(int i=0;i<Z;) {
 			 miejsceY = los.nextInt(X)+1;
 			 miejsceX = los.nextInt(X)+1;
@@ -118,13 +118,13 @@ public class Funkcje {
 			 }
 		}
 	}
-	
-	
+
+
 	public static void ustawianie_welociraptorow (int X,int Z,Mapa[][] map) {	//USTAWIENIE WELOCIRAPTOROW W LOSOWYM MIEJSCU
 		int miejsceY=-100;
 		int miejsceX=-100;
 		Random los = new Random();
-	
+
 		for(int i=0;i<Z;) {
 			 miejsceY = los.nextInt(X)+1;
 			 miejsceX = los.nextInt(X)+1;
@@ -134,9 +134,9 @@ public class Funkcje {
 			 }
 		}
 	}
-	
-	
-	
+
+
+
 	public static void ustawienie_poczatkowe(Mapa[][] map,int X,int Z,int W,int O,int D) {
 
 		ustawianie_mapy(X,map);
@@ -146,8 +146,8 @@ public class Funkcje {
 		ustawianie_zajacow(X,Z,map);
 		ustawianie_welociraptorow(X,W,map);
 	}
-	
-	
+
+
 	public static void stan_aktualny(Mapa[][] map, int X, Zliczanie ilosc) {
 		for(int i=0;i<X+2;i++) {
 			for(int j=0;j<X+2;j++) {
@@ -166,7 +166,19 @@ public class Funkcje {
 			}
 		}
 	}
+
+	public static void czekaj(int X) {
+        try{
+            Thread.sleep(X);
+        }
+        catch(Exception e){} 
+	}
 	
+	public static void przewijanie() {
+	    for(int i=0; i<25; ++i)
+	        System.out.println();
+	    System.out.flush();
+	}
 
 	public static void wyswietlenie_mapy(Mapa[][] map, int X) {
 		Zliczanie stan=new Zliczanie();
@@ -179,8 +191,67 @@ public class Funkcje {
 		Funkcje.stan_aktualny(map,X,stan);
 		System.out.println("Zajace	Welociraptory	Krzewy rozkoszy		Terytorium Wiedzmy");
 		System.out.println(stan.zajace+"	"+stan.welociraptory+"		"+stan.krzewy_rozkoszy+"			"+stan.dom_wiedzmy+"\n\n\n");
-		
+		Funkcje.czekaj(1500);
+		Funkcje.przewijanie();
 	}
+
+//////////////////////////////////////////////////////////////////////////////TO BEDZIE W INTERFACE ! PO SKONCZENIU USUNAC
+public static void epoka(Mapa[][] map, int X, int O, int P, int PZ, int PW) {
+Welociraptor WEL = new Welociraptor();
+Zajac ZAJ = new Zajac();
+OwocRozkoszy OWO= new OwocRozkoszy(); 
+Zliczanie stan = new Zliczanie();
+Wiedzma WIE = new Wiedzma();
+Funkcje.stan_aktualny(map,X,stan);
+int ilosc_owocow_do_rozmnozenia = O-stan.krzewy_rozkoszy;
+OWO.rozmnozenie(X, map, 1, 1, ilosc_owocow_do_rozmnozenia);
+
+
+/////////////////// NA BRUDNO ROZMNAZANIE ZAJACA - DZIALA
+
+for(int i=1;i<X+2;i++) {
+for(int j=1;j<X+2;j++) {
+if(map[i][j]instanceof Zajac) {
+ZAJ.rozmnozenie(X, map, i, j, 1);
+}
+}
+}
+
+//////////////////////	NA BRUDNO ROZMNAZANIE WELOCIRAPTORA - DZIALA
+for(int i=1;i<X+2;i++) {
+for(int j=1;j<X+2;j++) {
+if(map[i][j]instanceof Welociraptor) {
+WEL.rozmnozenie(X, map, i, j, 1);
+}
+}
+}
+
+/////////////////////// WYBUCH WIEDZMY NA BRUDNO - DZIALA
+P=100;
+WIE.czy_wybuch(X, map, P);
+
+Funkcje.wyswietlenie_mapy(map, X);
+
+///////////////////// NA BRUDNO PRZEDAWKOWANIE ZAJACA
+PZ=50;
+PW=50;
+	for(int i=1;i<X+2;i++) {
+		for(int j=1;j<X+2;j++) {
+			if(map[i][j]instanceof Zajac) {
+				ZAJ.przedawkowanie(i, j, map, PZ);
+			}
+			else if(map[i][j]instanceof Welociraptor) {
+				WEL.przedawkowanie(i, j, map, PW);
+			}
+		}
+	}
+
+
+
+			
+			
+	}	
 	
-	
+
+
 }

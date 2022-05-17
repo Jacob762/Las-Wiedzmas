@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 class LasWiedzmasTest {
-	
+
 	@Test
 	void test_poprawnej_implementacji_pustej_siatki() {	// SPRAWDZENIE CZY TWORZY ODPOWIEDNIA WIELKOSC SIATKI I WYPELNIA PUSTYMI ELEMENTAMI
 		Random los=new Random();
@@ -24,7 +24,7 @@ class LasWiedzmasTest {
 	}
 	Assert.assertEquals(ilosc,(X+2)*(X+2));
 }
-	
+
 	@Test
 	void test_poprawnej_implementacji_ogrodzenia() {	//SPRAWDZENIE CZY POPRAWNIE TWORZY OGRODZNIE
 		Random los=new Random();
@@ -41,7 +41,7 @@ class LasWiedzmasTest {
 		}
 	}
 	Assert.assertEquals(ilosc,2*(X+2)+2*X);	// CZY ODPOWIEDNIA ILOSC ELEMENTOW
-	
+
 	ilosc=0;
 	for(int i=1;i<X+1;i++) {
 		for(int j=1;j<X+1;j++) {
@@ -51,12 +51,12 @@ class LasWiedzmasTest {
 		}
 	}
 	Assert.assertEquals(ilosc,0);	// CZY W ODPOWIEDNIM MIEJSCU
-	
-	
+
+
 }
-	
-	
-	
+
+
+
 	@Test
 	void test_poprawnej_implementacji_agentow() {	// SPRAWDZENIE CZY OBSADZA AGENTOW W DOBRYM MIEJSCU I ILOSCI
 		Zliczanie stan=new Zliczanie();
@@ -75,9 +75,9 @@ class LasWiedzmasTest {
 		Assert.assertEquals(powinno_byc.dom_wiedzmy,stan.dom_wiedzmy);
 		Assert.assertEquals(powinno_byc.welociraptory,stan.welociraptory);
 		Assert.assertEquals(powinno_byc.krzewy_rozkoszy,stan.krzewy_rozkoszy);	// KONIEC SPRAWDZANIA ILOSCI
-		
+
 		int ilosc=0;
-		
+
 		for(int k=0;k<X+2;k+=X+1) {
 			for(int i=0;i<X+2;i++) {
 			if(!(mapa[k][i] instanceof Ogrodzenie)) {
@@ -85,7 +85,7 @@ class LasWiedzmasTest {
 			}
 		}
 	}
-		
+
 		for(int k=0;k<X+2;k+=X+1) {
 			for(int i=1;i<X+2;i++) {
 				if(!(mapa[k][i] instanceof Ogrodzenie)) {
@@ -93,12 +93,11 @@ class LasWiedzmasTest {
 				}
 		}
 	}
-		
+
 		Assert.assertEquals(ilosc,0);	// SPRAWDZAMY CZY W DOBRYM MIEJSCU (JEZELI BY BYL AGENT W OGRODZENIU TO ZLE)
-	
-}
-	
 
-	
 }
 
+
+
+}
