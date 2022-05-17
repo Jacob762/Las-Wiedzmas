@@ -14,6 +14,7 @@ public class Epoka_Implementacja implements Epoka {
 	
 	@Override
 	public void uzupelnienie_owocow(int X, Mapa[][] map, int O, Zliczanie stan) {
+		Funkcje.stan_aktualny(map, X, stan);
 	int ilosc_owocow_do_rozmnozenia= O-stan.krzewy_rozkoszy;
 
 	OWO.rozmnozenie(X, map, 1, 1, ilosc_owocow_do_rozmnozenia);

@@ -191,7 +191,7 @@ public class Funkcje {
 		Funkcje.stan_aktualny(map,X,stan);
 		System.out.println("Zajace	Welociraptory	Krzewy rozkoszy		Terytorium Wiedzmy");
 		System.out.println(stan.zajace+"	"+stan.welociraptory+"		"+stan.krzewy_rozkoszy+"			"+stan.dom_wiedzmy+"\n\n\n");
-		Funkcje.czekaj(1500);
+		//Funkcje.czekaj(1500);																												// ODKOMENTOWAC DLA SYMULAJCI
 		Funkcje.przewijanie();
 	}
 
@@ -203,6 +203,8 @@ OwocRozkoszy OWO= new OwocRozkoszy();
 Zliczanie stan = new Zliczanie();
 Wiedzma WIE = new Wiedzma();
 Funkcje.stan_aktualny(map,X,stan);
+
+/*
 int ilosc_owocow_do_rozmnozenia = O-stan.krzewy_rozkoszy;
 OWO.rozmnozenie(X, map, 1, 1, ilosc_owocow_do_rozmnozenia);
 
@@ -248,10 +250,24 @@ PW=50;
 
 
 
+		*/	
+/// NA BRUDNO RUCH 			
+
+for(int i=1;i<X+2;i++) {
+	for(int j=1;j<X+2;j++) {
+		if(map[i][j]instanceof Zajac) {
+			ZAJ.wykonanie_ruchu(i, j, map);;
+		}
+		else if(map[i][j]instanceof Welociraptor) {
 			
-			
+			WEL.wykonanie_ruchu(i, j, map);
+		}
 	}	
 	
+}
+Funkcje.wyswietlenie_mapy(map, X);
 
+
+}
 
 }

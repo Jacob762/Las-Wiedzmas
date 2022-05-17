@@ -8,11 +8,11 @@ public static void main(String[] args) {
 
 	Zliczanie stan=new Zliczanie();
 	//USTAWIENIA
-	int X = 45;	//ROZMIAR
-	int Z = 15;	//ILOSC ZAJACOW
-	int W = 8;	//ILOSC WELOCIRAPTOROW
-	int O = 35;	//ILOSC KRZEWOW ROZKOSZY
-	int D = 10;	//ROZMIAR DOMU WIEDZMY
+	int X = 10;	//ROZMIAR
+	int Z = 2;	//ILOSC ZAJACOW
+	int W = 1;	//ILOSC WELOCIRAPTOROW
+	int O = 2;	//ILOSC KRZEWOW ROZKOSZY
+	int D = 1;	//ROZMIAR DOMU WIEDZMY
 	int P = 5;	//PRAWDOPODOBIENSTWO WYBUCHY DOMU WIEDZMY W %
 	int PZ = 5;	//SZANSA NA PRZEDAWKOWANIE ZAJACA W %
 	int PW = 5;	//SZANSA NA PRZEDAWKOWANIE WELOCIRAPTOROW W %
@@ -26,7 +26,7 @@ public static void main(String[] args) {
 	Funkcje.ustawienie_poczatkowe(mapa,X,Z,W,O,D);
 	Funkcje.wyswietlenie_mapy(mapa, X);
 
-	
+	/*
 	///////////////////////////	NA BRUDNO USUWANIE WSZYSTKICH KRZEWOW I SPRAWDZENIE CZY POJAWIA SIE Z POWROTEM
 	for(int i=0;i<X+2;i++) {
 		for (int j=0;j<X+2;j++) {
@@ -35,7 +35,7 @@ public static void main(String[] args) {
 			}
 		}
 	}
-	
+	*/
 	for(int i=0;i<E;i++) {
 	Funkcje.epoka(mapa, X,O,P,PZ,PW);
 	Funkcje.wyswietlenie_mapy(mapa, X);
