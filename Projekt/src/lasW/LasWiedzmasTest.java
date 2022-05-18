@@ -2,12 +2,14 @@ package lasW;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;
+import java.io.PrintWriter;
 import java.math.*;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 class LasWiedzmasTest {
+	PrintWriter zapis;
 	boolean CP=false;
 	Wiedzma WIE = new Wiedzma();
 	Zajac ZAJ = new Zajac();
@@ -211,7 +213,7 @@ class LasWiedzmasTest {
 			}
 		}
 
-		Epoka_Implementacja ruch = new Epoka_Implementacja(mapa, X, 0,  0, 0, 0,0, stan, 0,CP);
+		Epoka_Implementacja ruch = new Epoka_Implementacja(mapa, X, 0,  0, 0, 0,0, stan, 0,CP,zapis);
 		
 		for(int i=0;i<X+2;i++) {						// SZUKANIE WSPOLRZEDNYCH KONCOWYCH
 			for (int j=0;j<X+2;j++) {
@@ -261,7 +263,7 @@ class LasWiedzmasTest {
 			}
 		}
 		
-		Epoka_Implementacja ruch = new Epoka_Implementacja(mapa, X, 0,  0, 0, 0,0, stan, 0,CP);
+		Epoka_Implementacja ruch = new Epoka_Implementacja(mapa, X, 0,  0, 0, 0,0, stan, 0,CP,zapis);
 		
 		for(int i=0;i<X+2;i++) {						// SZUKANIE WSPOLRZEDNYCH KONCOWYCH
 			for (int j=0;j<X+2;j++) {
@@ -297,7 +299,7 @@ class LasWiedzmasTest {
 		 D=0;
 		Mapa[][] mapa = new Mapa[X+2][X+2];
 		Funkcje.ustawienie_poczatkowe(mapa,X,Z,W,O,D);
-		Epoka_Implementacja ruch = new Epoka_Implementacja(mapa, X, 0,  0, 0, 0,0, stan, 0,CP);
+		Epoka_Implementacja ruch = new Epoka_Implementacja(mapa, X, 0,  0, 0, 0,0, stan, 0,CP,zapis);
 		Funkcje.stan_aktualny(mapa, X, stan);
 		
 		Assert.assertEquals(0, stan.krzewy_rozkoszy);
@@ -318,7 +320,7 @@ class LasWiedzmasTest {
 		 D=0;
 		Mapa[][] mapa = new Mapa[X+2][X+2];
 		Funkcje.ustawienie_poczatkowe(mapa,X,Z,W,O,D);
-		Epoka_Implementacja ruch = new Epoka_Implementacja(mapa, X, 0,  0, 0, 0,0, stan, 0,CP);
+		Epoka_Implementacja ruch = new Epoka_Implementacja(mapa, X, 0,  0, 0, 0,0, stan, 0,CP,zapis);
 		Funkcje.stan_aktualny(mapa, X, stan);
 		
 		Assert.assertEquals(0, stan.zajace);

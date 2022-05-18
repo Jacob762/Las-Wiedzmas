@@ -21,7 +21,7 @@ class Zajac extends Ruchome{
 	}
 
 	@Override
-	public void rozmnozenie(int Rozmiar, Mapa[][] map ,int y, int x,int ilosc) {	 // ILOSC TO LICZBA MLODYCH W MIOCIE (NA RAZIE 1, NIE MA W PLANACH ZMIANY, ALE KTO WIE) 
+	public void rozmnozenie(int Rozmiar, Mapa[][] map ,int y, int x,int ilosc) {	 // ILOSC TO LICZBA MLODYCH W MIOCIE
 			
 		
 				if(czy_miejsce_na_rozmnozenie(Rozmiar,map,ilosc)) {
@@ -101,63 +101,14 @@ class Zajac extends Ruchome{
 
 
 			}																//JAK NIE MA JEDZENIA TO IDZIE W LOSOWE
-			  {														// SA 2 MOZLIWOSCI - PUSTE ALBO WIEDZMA
+				else {														// SA 2 MOZLIWOSCI - PUSTE ALBO WIEDZMA
 								
 				
 				 
 				while(koniec!=0) {													
-					
-					int przypadek=Funkcje.przypadek(y, x, map);
-					
-					switch(przypadek){
-					case 0:
+
 						miejsceY = los.nextInt(3)-1;
-						miejsceX = los.nextInt(3)-1;
-						break;
-						
-					case 1:
-						miejsceY = los.nextInt(2);
-						miejsceX = los.nextInt(3)-1;
-						
-						break;
-						
-					case 2:
-						miejsceY = 1-los.nextInt(2);
-						miejsceX = los.nextInt(2);
-						
-						break;
-						
-					case 3:
-						miejsceY = 1-los.nextInt(2);
-						miejsceX = -1+los.nextInt(2);
-						
-						break;
-						
-					case 4:
-						miejsceY = los.nextInt(3)-1;
-						miejsceX = los.nextInt(2);
-						break;
-					case 5:
-						miejsceY = -1+los.nextInt(2);
-						miejsceX = los.nextInt(2);
-						
-						break;
-					case 6:
-						miejsceY = los.nextInt(3)-1;
-						miejsceX = -1+los.nextInt(2);
-						
-						break;
-					case 7:
-						miejsceY = -1+los.nextInt(2);
-						miejsceX = -1+los.nextInt(2);
-						break;
-					case 8:
-						miejsceY = -1+los.nextInt(2);
-						miejsceX = los.nextInt(3)-1;
-						break;
-				}
-				
-					
+						miejsceX = los.nextInt(3)-1;					
 					
 					if(miejsceY!=0 || miejsceX!=0) {
 					if(map[y+miejsceY][x+miejsceX] instanceof Puste || map[y+miejsceY][x+miejsceX] instanceof OwocRozkoszy) {
@@ -195,7 +146,7 @@ class Zajac extends Ruchome{
 	
 	
 	Zajac(){
-		symbol="Z";
+		symbol=new String(Character.toChars(0x1F430));
 		ilosc_ruchow=1;
 	}
 	

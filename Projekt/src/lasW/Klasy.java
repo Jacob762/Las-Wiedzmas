@@ -44,20 +44,20 @@ class Mapa {
 class Ogrodzenie extends Mapa{
 
 	Ogrodzenie(){
-		super.symbol="*";
+		symbol=new String(Character.toChars(0x2716));
 	}
 }
 
 class Puste extends Mapa{
 	Puste(){
-		symbol="P";
+		symbol=new String(Character.toChars(0x1F331));
 	}
 
 }
 
 class Wiedzma extends Mapa{
 	Wiedzma(){
-		symbol="X";
+		symbol=new String(Character.toChars(0x1F480));
 	}
 	protected void czy_wybuch(int X,Mapa[][] map,int szansa) {													
 		Random los = new Random();

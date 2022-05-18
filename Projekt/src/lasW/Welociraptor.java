@@ -123,58 +123,12 @@ for(int i=0;i<ilosc_ruchow;i++) {
 
 			}
 			
-		 {
-				while(koniec!=0) {
+				else {
+			
 					
-					int przypadek=Funkcje.przypadek(y, x, map);
+						miejsceY = los.nextInt(3)-1;
+						miejsceX = los.nextInt(3)-1;
 					
-					switch(przypadek){
-					case 0:
-						miejsceY = los.nextInt(3)-1;
-						miejsceX = los.nextInt(3)-1;
-						break;
-						
-					case 1:
-						miejsceY = los.nextInt(2);
-						miejsceX = los.nextInt(3)-1;
-						
-						break;
-						
-					case 2:
-						miejsceY = 1-los.nextInt(2);
-						miejsceX = los.nextInt(2);
-						
-						break;
-						
-					case 3:
-						miejsceY = 1-los.nextInt(2);
-						miejsceX = -1+los.nextInt(2);
-						
-						break;
-						
-					case 4:
-						miejsceY = los.nextInt(3)-1;
-						miejsceX = los.nextInt(2);
-						break;
-					case 5:
-						miejsceY = -1+los.nextInt(2);
-						miejsceX = los.nextInt(2);
-						
-						break;
-					case 6:
-						miejsceY = los.nextInt(3)-1;
-						miejsceX = -1+los.nextInt(2);
-						
-						break;
-					case 7:
-						miejsceY = -1+los.nextInt(2);
-						miejsceX = -1+los.nextInt(2);
-						break;
-					case 8:
-						miejsceY = -1+los.nextInt(2);
-						miejsceX = los.nextInt(3)-1;
-						break;
-				}
 					
 					
 					miejsceY = los.nextInt(3)-1;
@@ -203,7 +157,7 @@ for(int i=0;i<ilosc_ruchow;i++) {
 
 		}
 	}
-	}
+	
 	
 	@Override
 	protected void przedawkowanie (int y, int x, Mapa[][] map, int szansa_na_przedawkowanie) {
@@ -216,7 +170,7 @@ for(int i=0;i<ilosc_ruchow;i++) {
 	
 	
 	Welociraptor(){
-		symbol="W";
+		symbol=new String(Character.toChars(0x1F432));
 		ilosc_ruchow=1;
 	}
 

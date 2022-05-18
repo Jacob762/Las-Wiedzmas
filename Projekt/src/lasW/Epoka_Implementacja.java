@@ -1,4 +1,5 @@
 package lasW;
+import java.io.*;
 
 public class Epoka_Implementacja implements Epoka {
 	Zajac ZAJ = new Zajac();
@@ -83,12 +84,12 @@ public class Epoka_Implementacja implements Epoka {
 	
 	
 	
-	Epoka_Implementacja(Mapa[][] map, int X, int O, int P, int PZ, int PW,int ZM,Zliczanie stan,int i, boolean CP){
+	Epoka_Implementacja(Mapa[][] map, int X, int O, int P, int PZ, int PW,int ZM,Zliczanie stan,int i, boolean CP, PrintWriter zapis){
 		wybuch_domu_wiedmy(X,map,P);
 		uzupelnienie_owocow(X,map,O);
 		if(CP) {
-		System.out.println("START	EPOKA: "+(i+1));
-		Funkcje.wyswietlenie_mapy(map, X);
+		System.out.println("START	EPOKA: "+(i));
+		Funkcje.wyswietlenie_mapy(map, X,zapis, i);
 		}
 		przedawkowanie(X,map,PZ,PW);
 		wykonanie_ruchow(X,map,stan);

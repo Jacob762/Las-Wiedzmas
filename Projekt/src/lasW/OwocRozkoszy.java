@@ -62,7 +62,7 @@ class OwocRozkoszy extends Rozmnazalne {
 	}
 	}
 	OwocRozkoszy(){
-		symbol="O";
+		symbol=new String(Character.toChars(0x1F351));
 		
 	}
 }
