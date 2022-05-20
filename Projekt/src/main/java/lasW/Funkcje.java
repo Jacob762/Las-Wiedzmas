@@ -211,6 +211,8 @@ public class Funkcje {
 
 		}
 		Funkcje.stan_aktualny(map,X,stan);
+		addText(pane,"Zajace	Welociraptory	Krzewy rozkoszy		Terytorium Wiedzmy\n",Color.BLACK);
+		addText(pane,stan.zajace+"	"+stan.welociraptory+"		"+stan.krzewy_rozkoszy+"			"+stan.dom_wiedzmy+"\n",Color.BLACK);
 		System.out.println("Zajace	Welociraptory	Krzewy rozkoszy		Terytorium Wiedzmy");
 		System.out.println(stan.zajace+"	"+stan.welociraptory+"		"+stan.krzewy_rozkoszy+"			"+stan.dom_wiedzmy+"\n");
 		Funkcje.czekaj(1000);
@@ -249,7 +251,7 @@ public class Funkcje {
 		StyledDocument doc = pane.getStyledDocument();
 		Style style = pane.addStyle("Color Style",null);
 		StyleConstants.setForeground(style,color);
-		   StyleConstants.setFontSize(style, 18);
+		   StyleConstants.setFontSize(style, 15);
 		try
 		{
 			doc.insertString(doc.getLength(), text, style );

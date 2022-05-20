@@ -36,7 +36,10 @@ public static void Start(int X, int Z, int W, int O, int D, int P, int PZ, int P
 	f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	JTextPane pane = new JTextPane();
 	f.add(pane);
-	
+	JTextArea area = new JTextArea();
+	area.setBounds(100,100,200,100);
+	area.setText("XD");
+	f.add(area);
 	f.setVisible(true);
 
 	 PrintWriter zapis;
@@ -60,10 +63,11 @@ public static void Start(int X, int Z, int W, int O, int D, int P, int PZ, int P
 			listaZ.add(Z);
 			ArrayList<Integer> listaW = new ArrayList<>();
 			listaW.add(W);
-			
-			chart.addSeries("Z", listaE, listaZ);
-			chart.addSeries("W", listaE, listaW);
-			
+			ArrayList<Integer> listaO = new ArrayList<>();
+			listaO.add(O);
+			chart.addSeries("Zajace", listaE, listaZ);
+			chart.addSeries("Welocilaptory", listaE, listaW);
+			chart.addSeries("Owoce Rozkoszy",listaE,listaO);
 
 			Thread t1 = new Thread(new Runnable() { //thread do stworzenia funkcji realtime, bez tego wywala blad
 				
@@ -84,11 +88,13 @@ public static void Start(int X, int Z, int W, int O, int D, int P, int PZ, int P
 						listaE.add(i + 1);
 						listaZ.add(LasWiedzmas.sTan.zajace);
 						listaW.add(LasWiedzmas.sTan.welociraptory);
+						listaO.add(LasWiedzmas.sTan.krzewy_rozkoszy);
 							javax.swing.SwingUtilities.invokeLater(new Runnable() { //drugi runnable w threadzie, thread pozwala mu istniec i funkcjonowac w spokokju
 								@Override
 									public void run() {
-										chart.updateXYSeries("Z", listaE, listaZ, null);
-										chart.updateXYSeries("W", listaE, listaW, null);
+										chart.updateXYSeries("Zajace", listaE, listaZ, null);
+										chart.updateXYSeries("Welocilaptory", listaE, listaW, null);
+										chart.updateXYSeries("Owoce Rozkoszy",listaE,listaO,null);
 										sw.repaintChart();
 									}
 								});
