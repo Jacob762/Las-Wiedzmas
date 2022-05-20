@@ -1,9 +1,8 @@
 package lasW;
-import java.io.*;
-import java.util.ArrayList;
 
-public class Epoka_Implementacja implements Epoka {
-	Zajac ZAJ = new Zajac();
+
+public class Epoka_Implementacja implements Epoka {	// IMPLEMENTACJA INTERFEJSU EPOKA - TUTAJ ZNAJDUJA SIE WSZYSTKIE FUNKCJE 
+	Zajac ZAJ = new Zajac();						// ODPOWIEDZIALNE ZA ZACHOWANIE AGENTOW
 	Welociraptor WEL = new Welociraptor();
 	OwocRozkoszy OWO= new OwocRozkoszy(); 
 	Wiedzma WIE = new Wiedzma();
@@ -19,7 +18,7 @@ public class Epoka_Implementacja implements Epoka {
 	public void uzupelnienie_owocow(int X, Mapa[][] map, int O) {
 		Funkcje.stan_aktualny(map, X, stan);
 		int BO = O-stan.krzewy_rozkoszy;
-	OWO.rozmnozenie(X, map, 1, 1, BO);
+		OWO.rozmnozenie(X, map, 1, 1, BO);
 	}
 	
 
@@ -85,14 +84,10 @@ public class Epoka_Implementacja implements Epoka {
 	
 	
 	
-	Epoka_Implementacja(Mapa[][] map, int X, int O, int P, int PZ, int PW,int ZM,Zliczanie stan,int i, boolean CP, PrintWriter zapis){
-		ArrayList <Zliczanie> buf = new ArrayList<Zliczanie>();
+	Epoka_Implementacja(Mapa[][] map, int X, int O, int P, int PZ, int PW,int ZM,Zliczanie stan,int i){
+
 		wybuch_domu_wiedmy(X,map,P);
 		uzupelnienie_owocow(X,map,O);
-		if(CP) {
-		System.out.println("START	EPOKA: "+(i));
-		Funkcje.wyswietlenie_mapy(map, X,zapis, i,null);
-		}
 		przedawkowanie(X,map,PZ,PW);
 		wykonanie_ruchow(X,map,stan);
 		rozmnozenie(X,map,ZM);

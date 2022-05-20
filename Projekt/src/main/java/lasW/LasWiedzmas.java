@@ -4,47 +4,45 @@ import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;
 
 import javax.swing.*;
-
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.io.*;
 import java.util.*;
 
+// KLASA ODPOWIEDZIALNA ZA PRZEBIEG SYMULACJI
 public class LasWiedzmas {
-	//USTAWIENIA
-	static int X = 40;				//ROZMIAR
-	static int Z = 15;				//ILOSC ZAJACOW
-	static int W = 15;				//ILOSC WELOCIRAPTOROW
-	static int O = 30;				//ILOSC KRZEWOW ROZKOSZY
-	static int D = 15;				//ROZMIAR DOMU WIEDZMY
+	
+	//USTAWIENIA DOMYSLNE
+	static int X = 40;			//ROZMIAR
+	static int Z = 15;			//ILOSC ZAJACOW
+	static int W = 15;			//ILOSC WELOCIRAPTOROW
+	static int O = 30;			//ILOSC KRZEWOW ROZKOSZY
+	static int D = 15;			//ROZMIAR DOMU WIEDZMY
 	static int ZM = 2; 			//ILOSC ZAJACOW W MIOCIE
-	static int P = 1;				//PRAWDOPODOBIENSTWO WYBUCHY DOMU WIEDZMY W %
-	static int PZ = 1;				//SZANSA NA PRZEDAWKOWANIE ZAJACA W %
-	static int PW = 5;				//SZANSA NA PRZEDAWKOWANIE WELOCIRAPTOROW W %
+	static int P = 1;			//PRAWDOPODOBIENSTWO WYBUCHY DOMU WIEDZMY W %
+	static int PZ = 1;			//SZANSA NA PRZEDAWKOWANIE ZAJACA W %
+	static int PW = 5;			//SZANSA NA PRZEDAWKOWANIE WELOCIRAPTOROW W %
 	static int E = 10;			//ILOSC EPOK
+	///////////////////
 	static Zliczanie sTan;
-	static boolean CP = false; 	//CZY WYSWIETLAC START EPOKI (Z OWOCAMI)
 
 
+	
 
-public static void Start(int X, int Z, int W, int O, int D, int P, int PZ, int PW, int E) throws FileNotFoundException{ //funckja main zamieniona na start do gui no. 3, w zasadzie cale gui jest tu
 
+public static void Start(int X, int Z, int W, int O, int D, int P, int PZ, int PW, int E) throws FileNotFoundException{ // FUNKCJA ODPOWIEDZIALNA ZA SYMULACJE
+
+
+	
 	JFrame f = new JFrame("Las Wiedzma's");
 	f.setSize(1500,1000);
 	f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	f.setBackground(Color.WHITE);
 	JTextPane pane = new JTextPane();
 	f.add(pane);
-	JTextArea area = new JTextArea();
-	area.setBounds(100,100,200,100);
-	area.setText("XD");
-	f.add(area);
+	f.setLayout(new FlowLayout());
 	f.setVisible(true);
 
-	 PrintWriter zapis;
-		 zapis = new PrintWriter("LasWiedzmas.txt");
-		 zapis.println("Epoka;Zajace;Welociraptory;Krzewy_rozkoszy;Terytorium_Wiedzmy");
+
 			Zliczanie stan=new Zliczanie();
 			f.setLocationRelativeTo(null);
 			/////////////////////////////////////////////////////////
@@ -54,9 +52,9 @@ public static void Start(int X, int Z, int W, int O, int D, int P, int PZ, int P
 			Mapa[][] mapa = new Mapa[X+2][X+2];
 
 			Funkcje.ustawienie_poczatkowe(mapa,X,Z,W,O,D);
-			System.out.println("EPOKA: 0");
-			Funkcje.wyswietlenie_mapy(mapa, X,zapis,0,pane); //zapis dziala
-			XYChart chart = new XYChartBuilder().height(600).width(400).title("Wykres").xAxisTitle("Epoka").yAxisTitle("Stworzenie").build(); //tworzenie wykresu
+			System.out.println("Epoka;Zajac;Welociraptor;Krzewy_rozkoszy:Terytorium_wiedzmy");
+			Funkcje.wyswietlenie_mapy(mapa, X,0,pane);
+			XYChart chart = new XYChartBuilder().height(600).width(400).title("Wykres").xAxisTitle("Epoka").yAxisTitle("Stworzenie").build(); //TWORZENIE WYKRESU
 			ArrayList<Integer> listaE = new ArrayList<>();
 			listaE.add(0);
 			ArrayList<Integer> listaZ = new ArrayList<>();
@@ -67,34 +65,34 @@ public static void Start(int X, int Z, int W, int O, int D, int P, int PZ, int P
 			listaO.add(O);
 			chart.addSeries("Zajace", listaE, listaZ);
 			chart.addSeries("Welocilaptory", listaE, listaW);
-			chart.addSeries("Owoce Rozkoszy",listaE,listaO);
+			chart.addSeries("Owoce rozkoszy",listaE, listaO);
 
-			Thread t1 = new Thread(new Runnable() { //thread do stworzenia funkcji realtime, bez tego wywala blad
-				
+			Thread t1 = new Thread(new Runnable() { // THREAD DO STWORZENIA FUNKCJI REALTIME
+													// BEZ TEGO WYWALA BLAD
 				@Override
 				public void run() {
 					final SwingWrapper<XYChart> sw = new SwingWrapper<XYChart>(chart);
-					sw.displayChart(); //wyswietlanie wykresu (musi byc w threadzie)
+					sw.displayChart(); 		// WYSWIETLANIE WYKRESU (MUSI BYC W THREADZIE)
 					f.remove(pane);
 					f.invalidate();
 					f.validate();
 					for(int i=1;i<=E;i++) {
 						JTextPane tempPane = new JTextPane();
-						f.add(tempPane);//dodanie nowo wygenerowaengo pane do gui
-						new Epoka_Implementacja(mapa, X, O,  P, PZ, PW,ZM, stan, i,CP,zapis);
-						System.out.println("EPOKA: "+(i));
-						sTan = Funkcje.wyswietlenie_mapy(mapa, X,zapis,i,tempPane); //TO-DO tu sie jebie zapis
+						f.add(tempPane);	// DODANIE NOWO WYGENEROWANEGO PANE DO GUI
+						new Epoka_Implementacja(mapa, X, O,  P, PZ, PW,ZM, stan, i);
 
-						listaE.add(i + 1);
+						sTan = Funkcje.wyswietlenie_mapy(mapa, X,i,tempPane); 
+
+						listaE.add(i);
 						listaZ.add(LasWiedzmas.sTan.zajace);
 						listaW.add(LasWiedzmas.sTan.welociraptory);
 						listaO.add(LasWiedzmas.sTan.krzewy_rozkoszy);
-							javax.swing.SwingUtilities.invokeLater(new Runnable() { //drugi runnable w threadzie, thread pozwala mu istniec i funkcjonowac w spokokju
-								@Override
+							javax.swing.SwingUtilities.invokeLater(new Runnable() { // DRUGI RUNNABLE W THREADZIE, THREAD POZWALA MU
+								@Override											// ISTNIEC W SPOKOJU
 									public void run() {
 										chart.updateXYSeries("Zajace", listaE, listaZ, null);
 										chart.updateXYSeries("Welocilaptory", listaE, listaW, null);
-										chart.updateXYSeries("Owoce Rozkoszy",listaE,listaO,null);
+										chart.updateXYSeries("Owoce rozkoszy",listaE,listaO,null);
 										sw.repaintChart();
 									}
 								});
@@ -107,7 +105,7 @@ public static void Start(int X, int Z, int W, int O, int D, int P, int PZ, int P
 			});
 			t1.start();
 
-			zapis.close();
+
 	}
 
 }

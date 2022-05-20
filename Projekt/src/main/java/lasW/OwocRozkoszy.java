@@ -2,6 +2,8 @@ package lasW;
 
 import java.util.Random;
 
+// KLASA OwocRozkoszy JEST UMIEJSCOWIONA POZA KLASA Klasy ZE WZGLEDU NA ROZMIAR 
+
 class OwocRozkoszy extends Rozmnazalne {
 	
 	protected int ile_wolnych(int rozmiar, Mapa[][] map) {

@@ -2,6 +2,8 @@ package lasW;
 
 import java.util.Random;
 
+//KLASA Zajac JEST UMIEJSCOWIONA POZA KLASA Klasy ZE WZGLEDU NA ROZMIAR 
+
 class Zajac extends Ruchome{
 
 	@Override
@@ -95,7 +97,7 @@ class Zajac extends Ruchome{
 						map[y+miejsceY][x+miejsceX] = new NajedzonyZajac();
 						map[y][x]=new Puste();
 						koniec=0;
-						zjadl_w_tej_rundzie++;
+
 					}
 				}
 
@@ -118,7 +120,6 @@ class Zajac extends Ruchome{
 					}
 					else if(map[y+miejsceY][x+miejsceX] instanceof Wiedzma) {
 						map[y][x]=new Puste();
-						stan.zabite_zajace++;
 						koniec=0;
 					}
 

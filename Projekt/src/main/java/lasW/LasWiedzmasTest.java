@@ -1,13 +1,13 @@
 package lasW;
 
-import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;
 import java.io.PrintWriter;
-import java.math.*;
+
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
+// KLASA WYKONUJACA TESTY JEDNOSTKOWE
 class LasWiedzmasTest {
 	PrintWriter zapis;
 	boolean CP=false;
@@ -35,7 +35,7 @@ class LasWiedzmasTest {
 }
 
 	@Test
-	void test_poprawnej_implementacji_ogrodzenia() {	//SPRAWDZENIE CZY POPRAWNIE TWORZY OGRODZNIE
+	void test_poprawnej_implementacji_ogrodzenia() {	// SPRAWDZENIE CZY POPRAWNIE TWORZY OGRODZNIE
 		Random los=new Random();
 	int X= los.nextInt(1000-10)+11;
 	int ilosc=0;
@@ -108,7 +108,7 @@ class LasWiedzmasTest {
 	
 	
 	@Test
-	void test_wybuchu_domu_wiedzmy(){	// SPRAWDZAMY CZY PO WYBUCHU NIE ZOSTAJE JEJ TERYTORIUM
+	void test_wybuchu_domu_wiedzmy(){	// SPRAWDZAMY CZY TERYTORIUM WIEDZMY POPRAWNIE WYBUCHA
 		Random los=new Random();
 		int X= los.nextInt(1000-10)+11;
 		Mapa[][] mapa = new Mapa[X+2][X+2];
@@ -144,7 +144,7 @@ class LasWiedzmasTest {
 					ZAJ.przedawkowanie(i, j, mapa, PZ);
 				}
 				else if(mapa[i][j] instanceof Welociraptor) {
-					WEL.przedawkowanie(i, j, mapa, PZ);
+					WEL.przedawkowanie(i, j, mapa, PW);
 				}
 			}
 		}
@@ -213,7 +213,7 @@ class LasWiedzmasTest {
 			}
 		}
 
-		Epoka_Implementacja ruch = new Epoka_Implementacja(mapa, X, 0,  0, 0, 0,0, stan, 0,CP,zapis);
+		new Epoka_Implementacja(mapa, X, 0,  0, 0, 0,0, stan, 0);
 		
 		for(int i=0;i<X+2;i++) {						// SZUKANIE WSPOLRZEDNYCH KONCOWYCH
 			for (int j=0;j<X+2;j++) {
@@ -263,7 +263,7 @@ class LasWiedzmasTest {
 			}
 		}
 		
-		Epoka_Implementacja ruch = new Epoka_Implementacja(mapa, X, 0,  0, 0, 0,0, stan, 0,CP,zapis);
+		new Epoka_Implementacja(mapa, X, 0,  0, 0, 0,0, stan, 0);
 		
 		for(int i=0;i<X+2;i++) {						// SZUKANIE WSPOLRZEDNYCH KONCOWYCH
 			for (int j=0;j<X+2;j++) {
@@ -290,7 +290,6 @@ class LasWiedzmasTest {
 		
 		
 		Zliczanie stan=new Zliczanie();
-		Random los=new Random();
 		int X,Z,W,O,D;
 		 X=2;
 		 Z=1;
@@ -299,7 +298,7 @@ class LasWiedzmasTest {
 		 D=0;
 		Mapa[][] mapa = new Mapa[X+2][X+2];
 		Funkcje.ustawienie_poczatkowe(mapa,X,Z,W,O,D);
-		Epoka_Implementacja ruch = new Epoka_Implementacja(mapa, X, 0,  0, 0, 0,0, stan, 0,CP,zapis);
+		new Epoka_Implementacja(mapa, X, 0,  0, 0, 0,0, stan, 0);
 		Funkcje.stan_aktualny(mapa, X, stan);
 		
 		Assert.assertEquals(0, stan.krzewy_rozkoszy);
@@ -308,10 +307,7 @@ class LasWiedzmasTest {
 
 	@Test
 	void test_zjadania_zajaca() {						//SPRAWDZANIE CZY WELOCIRAPTOR ZJE ZAJACA
-		
-		
 		Zliczanie stan=new Zliczanie();
-		Random los=new Random();
 		int X,Z,W,O,D;
 		 X=2;
 		 Z=1;
@@ -320,7 +316,7 @@ class LasWiedzmasTest {
 		 D=0;
 		Mapa[][] mapa = new Mapa[X+2][X+2];
 		Funkcje.ustawienie_poczatkowe(mapa,X,Z,W,O,D);
-		Epoka_Implementacja ruch = new Epoka_Implementacja(mapa, X, 0,  0, 0, 0,0, stan, 0,CP,zapis);
+		new Epoka_Implementacja(mapa, X, 0,  0, 0, 0,0, stan, 0);
 		Funkcje.stan_aktualny(mapa, X, stan);
 		
 		Assert.assertEquals(0, stan.zajace);

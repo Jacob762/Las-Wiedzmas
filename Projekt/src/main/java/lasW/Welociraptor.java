@@ -2,6 +2,8 @@ package lasW;
 
 import java.util.Random;
 
+//KLASA Welociraptor JEST UMIEJSCOWIONA POZA KLASA Klasy ZE WZGLEDU NA ROZMIAR 
+
 class Welociraptor extends Ruchome{
 
 	@Override
@@ -116,7 +118,7 @@ for(int i=0;i<ilosc_ruchow;i++) {
 						map[y+miejsceY][x+miejsceX] =  new NajedzonyWelociraptor();
 						
 						koniec=0;
-						zjadl_w_tej_rundzie++;
+
 					}
 				}
 
@@ -141,13 +143,13 @@ for(int i=0;i<ilosc_ruchow;i++) {
 					}
 					else if(map[y+miejsceY][x+miejsceX] instanceof Wiedzma) {
 						map[y][x]=new Puste();
-						stan.zabite_welociraptory++;
+				
 						koniec=0;
 					}
 					else if(map[y+miejsceY][x+miejsceX] instanceof OwocRozkoszy) {
 						map[y+miejsceY][x+miejsceX] = new BuforWelociraptora();
 						map[y][x]=new Puste();
-						stan.zdeptane_krzewy++;
+					
 						koniec=0;
 					}
 				}

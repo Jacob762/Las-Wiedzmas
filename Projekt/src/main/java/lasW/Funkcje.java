@@ -6,14 +6,13 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Random;
-import java.io.*;
 
-public class Funkcje {
+
+public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTALE KLASY W PAKIECIE
 
 	protected static void sprawdzenie_ustawien(int X,int Z,int W,int O,int D,int P, int PZ, int PW, int E) {
-		if(X<10 || X>1000) {
+		if(X<10 || X>40) {
 			System.out.println("Niepoprawna wartosc X: "+X);
 			 System.exit(0);
 		}
@@ -146,7 +145,7 @@ public class Funkcje {
 
 
 
-	protected static void ustawienie_poczatkowe(Mapa[][] map,int X,int Z,int W,int O,int D) {
+	protected static void ustawienie_poczatkowe(Mapa[][] map,int X,int Z,int W,int O,int D) {	// FUNKCJA LACZACA POPRZEDNIE W JEDNA
 
 		ustawianie_mapy(X,map);
 		budowa_ogrodzenia(X,map);
@@ -159,8 +158,8 @@ public class Funkcje {
 	}
 
 
-	protected static void stan_aktualny(Mapa[][] map, int X, Zliczanie ilosc) {
-		for(int i=0;i<X+2;i++) {
+	protected static void stan_aktualny(Mapa[][] map, int X, Zliczanie ilosc) { 				// FUNKCJA AKTUALIZUJACA INFORMACJE O LICZEBNOSCI
+		for(int i=0;i<X+2;i++) {																//	W OBIEKCIE KLASY ZLICZANIE
 			for(int j=0;j<X+2;j++) {
 				if(map[i][j] instanceof Zajac) {
 					ilosc.zajace++;
@@ -178,45 +177,42 @@ public class Funkcje {
 		}
 	}
 
-	protected static void czekaj(int X) {
+	protected static void czekaj(int X) {													// FUNKCJA OPOZNIAJACA DALSZE WYKONANIA
         try{
             Thread.sleep(X);
         }
         catch(Exception e){} 
 	}
 	
-	protected static void przewijanie() {
+	protected static void przewijanie() {													// FUNKCJA PRZEWIJAJACA KONSOLE (DO SYMULOWANIA W KONSOLI)
 	    for(int i=0; i<25; ++i)
 	        System.out.println();
 	    System.out.flush();
 	}
 
-	protected static Zliczanie wyswietlenie_mapy(Mapa[][] map, int X, PrintWriter zapis, int nr_epoki, JTextPane pane) { //wyswietlanie mapy zwraca zliczanie, co pomaga w tworzeniu wykresu
+	protected static Zliczanie wyswietlenie_mapy(Mapa[][] map, int X, int nr_epoki, JTextPane pane) { //wyswietlanie mapy zwraca zliczanie, co pomaga w tworzeniu wykresu
 		Zliczanie stan=new Zliczanie();																					// tworzy rowniez na biezaco text pane
 
 		
 		for(int i=0;i<X+2;i++) {
 			for( int j=0;j<X+2;j++) {
+
 				Color color=Color.BLACK;
-				System.out.print(map[i][j].symbol);
 				if(map[i][j] instanceof Zajac) {color=Color.GREEN;}
 				else if(map[i][j] instanceof OwocRozkoszy) {color=Color.ORANGE;}
 				else if(map[i][j] instanceof Welociraptor) {color=Color.RED;}
 				else if(map[i][j] instanceof Puste) {color=Color.gray;}
+
 				addText(pane,map[i][j].symbol,color);
 			}
 			Color color=Color.BLACK;
-			System.out.println();
 			addText(pane,"\n",color);
 
 		}
 		Funkcje.stan_aktualny(map,X,stan);
-		addText(pane,"Zajace	Welociraptory	Krzewy rozkoszy		Terytorium Wiedzmy\n",Color.BLACK);
-		addText(pane,stan.zajace+"	"+stan.welociraptory+"		"+stan.krzewy_rozkoszy+"			"+stan.dom_wiedzmy+"\n",Color.BLACK);
-		System.out.println("Zajace	Welociraptory	Krzewy rozkoszy		Terytorium Wiedzmy");
-		System.out.println(stan.zajace+"	"+stan.welociraptory+"		"+stan.krzewy_rozkoszy+"			"+stan.dom_wiedzmy+"\n");
+		addText(pane," Epoka: "+nr_epoki+" | Zajace: "+stan.zajace+" | Welociraptory: "+	stan.welociraptory+" | Krzewy rozkoszy: "+stan.krzewy_rozkoszy+" | Terytorium Wiedzmy: "+stan.dom_wiedzmy+"\n",Color.BLACK);
+		System.out.println(nr_epoki+";"+stan.zajace+";"+stan.welociraptory+";"+stan.krzewy_rozkoszy+";"+stan.dom_wiedzmy);
 		Funkcje.czekaj(1000);
-		Funkcje.przewijanie();
 		return stan;
 	}
 
@@ -251,7 +247,7 @@ public class Funkcje {
 		StyledDocument doc = pane.getStyledDocument();
 		Style style = pane.addStyle("Color Style",null);
 		StyleConstants.setForeground(style,color);
-		   StyleConstants.setFontSize(style, 15);
+		   StyleConstants.setFontSize(style, 18);
 		try
 		{
 			doc.insertString(doc.getLength(), text, style );

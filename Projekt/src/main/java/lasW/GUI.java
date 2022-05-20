@@ -1,16 +1,9 @@
 package lasW;
-import org.knowm.xchart.SwingWrapper;
-import org.knowm.xchart.XYChart;
-import org.knowm.xchart.XYChartBuilder;
-
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-
-
 import javax.swing.*;
 
 import static lasW.LasWiedzmas.X;
@@ -24,7 +17,12 @@ import static lasW.LasWiedzmas.PW;
 import static lasW.LasWiedzmas.E;
 
 
+// GLOWNA KLASA PROGRAMU ODPOWIEDZIALNA ZA STEROWANIE PROGRAMEM W SPOSOB GRAFICZNY
 public class GUI implements ActionListener{
+	
+	public static void main (String[]args) throws FileNotFoundException {	// KLASA MAIN ROZPOCZYNAJACA PROGRAM
+		new GUI(0);
+	}
 
 	JButton przycisk_start = new JButton(new String(Character.toChars(0x25B8)));
 	JButton przycisk_ustawienia = new JButton(new String(Character.toChars(0x2699)));	
@@ -315,16 +313,11 @@ public class GUI implements ActionListener{
 	}
 	
 	
-	public static void main (String[]args) throws FileNotFoundException {
-		new GUI(0);
-	}
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if((e.getSource() == przycisk_start)) {
+		if((e.getSource() == przycisk_start)) {	// ROZPOCZYNA SYMULACJE NA USTAWIENIACH DOMYSLNYCH
 			frame1.setVisible(false);
-			System.out.println("START!");
 			przycisk_start.setForeground(Color.CYAN);
 			//new GUI(3)	//SYMULACJA
 			try {
@@ -334,9 +327,8 @@ public class GUI implements ActionListener{
 			}
 		}
 		
-		else if(e.getSource() == przycisk_ustawienia) {
+		else if(e.getSource() == przycisk_ustawienia) { // WLACZA OKIENKO WYBORU USTAWIEN
 			frame1.setVisible(false);
-			System.out.println("USTAWIENIA!");
 			przycisk_ustawienia.setForeground(Color.CYAN);
 			try {
 				new GUI(1);
@@ -346,7 +338,7 @@ public class GUI implements ActionListener{
 
 		}
 	
-		else if(e.getSource() == przycisk_zatwierdzania_ustawien) {
+		else if(e.getSource() == przycisk_zatwierdzania_ustawien) {	// ZATWIERDZA USTAWIENIA I ROZPOCZYNA SYMULACJE
 			frame1.setVisible(false);
 			String Xs=rozmiar.getText();
 			int Xb=Integer.parseInt(Xs);
@@ -377,7 +369,7 @@ public class GUI implements ActionListener{
 			
 			String Es=epoki.getText();
 			int Eb=Integer.parseInt(Es);
-
+		
 			
 				frame2.setVisible(false);
 
@@ -387,14 +379,11 @@ public class GUI implements ActionListener{
 					ex.printStackTrace();
 				}
 			
-			System.out.println(Xb);
-			System.out.println("USTAWIENIA ZATWIERDZONE");
+
 			
-			//new GUI(3)	//SYMULACJA
+
 		}
 	else if(e.getSource() == przycisk_wylanczania) {
-		String end =new String(Character.toChars(0x2716));
-		System.out.print("DZIEKUJEMY ZA SKORZYSTANIE Z NASZEGO PROGRAMU");
 		System.exit(0);
 		}
 		

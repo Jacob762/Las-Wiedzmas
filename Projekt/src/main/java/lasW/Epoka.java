@@ -1,6 +1,6 @@
 package lasW;
 
-public interface Epoka {
+public interface Epoka {	// INTERFEJS PRZEBIEGU KROKOW EPOKI
     void wybuch_domu_wiedmy(int X, Mapa[][] map, int P);
 	void uzupelnienie_owocow(int X, Mapa[][] map, int O);
 	void przedawkowanie(int X,Mapa[][] map, int PZ, int PW);
