@@ -5,6 +5,7 @@ import java.util.Random;
 // KLASA Klasy JEST ODPOWIEDZIALNA ZA DZIEDZICZENIE
 
 class Zliczanie{	// KLASA ODPOWIEDZIALANA ZA PRZECHOWYWANIE ILIOSCI AGENTOW
+
 	protected int zajace;
 	protected int welociraptory;
 	protected int krzewy_rozkoszy;

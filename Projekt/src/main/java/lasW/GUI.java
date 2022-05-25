@@ -17,12 +17,25 @@ import static lasW.LasWiedzmas.PW;
 import static lasW.LasWiedzmas.E;
 
 
-// GLOWNA KLASA PROGRAMU ODPOWIEDZIALNA ZA STEROWANIE PROGRAMEM W SPOSOB GRAFICZNY
-public class GUI implements ActionListener{
+
+/**
+ * Klasa odpowiadajaca za GUI
+ * @author Nowaczyk/Klawon
+ *
+ */
+
+public class GUI implements ActionListener{//GLOWNA KLASA PROGRAMU ODPOWIEDZIALNA ZA STEROWANIE PROGRAMEM W SPOSOB GRAFICZNY
 	
+	/**
+	 * 
+	 * glowna metoda rozpoczynajaca program - otwiera MENU glowne GUI
+	 * @param args Tablica argumentow metody main
+	 * @throws FileNotFoundException Wyjatek nie istnienia pliku
+	 */
 	public static void main (String[]args) throws FileNotFoundException {	// KLASA MAIN ROZPOCZYNAJACA PROGRAM
 		new GUI(0);
 	}
+
 
 	JButton przycisk_start = new JButton(new String(Character.toChars(0x25B8)));
 	JButton przycisk_ustawienia = new JButton(new String(Character.toChars(0x2699)));	
@@ -44,6 +57,15 @@ public class GUI implements ActionListener{
 	JTextField welp = new JTextField(20);
 	JTextField epoki = new JTextField(20);
 	
+	/**
+	 * 
+	 * Klasa tworzy rozne okna w zaleznosci od parametrow:<
+	 * 0 - MENU glowne
+	 * 1 - MENU ustawien
+	 * 2 - Wywolanie startu symulacji
+	 * @param i
+	 * @throws FileNotFoundException
+	 */
 	GUI(int i) throws FileNotFoundException {
 		
 		// 0 - EKRAN GLOWNY
@@ -313,6 +335,16 @@ public class GUI implements ActionListener{
 	}
 	
 	
+	/**
+	 * 
+	 * Metoda odpowiadajaca za dzialanie przyciskow, w zaleznosci od tego, ktory zosyal nacisniety:
+	 * przycisk_start - zamyka okno MENU glownego i rozpoczyna symulacje
+	 * przycisk_ustawienia - zamyka okno MENU glownego i otwiera MENU ustawien
+	 * przycisk_zatwierdzania_ustawien - zamyka MENU ustawien i wywoluje symulacje z zadanymi ustawieniami
+	 * przycisk_wylanczania - konczy dzialanie programu
+	 * powrot_do_menu - zamyka okno ustawien i otwiera MENU glowne
+	 * 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		

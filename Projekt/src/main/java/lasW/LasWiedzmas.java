@@ -9,6 +9,11 @@ import java.io.*;
 import java.util.*;
 
 // KLASA ODPOWIEDZIALNA ZA PRZEBIEG SYMULACJI
+/**
+ * Klasa odpowiedzialna za ustawienie domyslnych parametrow symulacji
+ * @author Nowaczyk/Klawon
+ *
+ */
 public class LasWiedzmas {
 	
 	//USTAWIENIA DOMYSLNE
@@ -29,6 +34,19 @@ public class LasWiedzmas {
 	
 
 
+/**
+ * Funkcja odpowiadajaca za przeprowadzenie i wyswietlenie symulacji z odpowiednimi parametrami
+ * @param X Rozmiar siatki symulacji
+ * @param Z Poczatkowa ilosc zajacow
+ * @param W Poczatkowa ilosc welociraptorow
+ * @param O Poczatkowa ilosc krzewow rozkoszy
+ * @param D Poczatkowa wielkosc terytorium wiedzmy (dlugosc boku)
+ * @param P Prawdopodobienstwo wybuchu wiedzmy
+ * @param PZ Prawdopodobienstwo przedawkowania zajaca
+ * @param PW Prawdopodobienstwo przedawkowania welociraptora
+ * @param E Ilosc epok symulacji
+ * @throws FileNotFoundException Wyjatek nie istnienia pliku
+ */
 public static void Start(int X, int Z, int W, int O, int D, int P, int PZ, int PW, int E) throws FileNotFoundException{ // FUNKCJA ODPOWIEDZIALNA ZA SYMULACJE
 
 

@@ -9,8 +9,25 @@ import java.awt.*;
 import java.util.Random;
 
 
+/**
+ * Klasa zawierajaca funkcje wykorzystywane w programie
+ * @author Nowaczyk/Klawon
+ *
+ */
 public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTALE KLASY W PAKIECIE
 
+	/**
+	 * Metoda sprawdzajaca czy ustawienia sa poprawne (zgodne z wymaganiami zawartymi w tebeli z opisu projektu w jezyku naturalnym)
+	 * @param X Rozmiar siatki symulacji
+	 * @param Z Poczatkowa ilosc zajacow
+	 * @param W Poczatkowa ilosc welociraptorow
+	 * @param O Poczatkowa ilosc krzewow rozkoszy
+	 * @param D Poczatkowa wielkosc terytorium wiedzmy (dlugosc boku)
+	 * @param P Prawdopodobienstwo wybuchu wiedzmy
+	 * @param PZ Prawdopodobienstwo przedawkowania zajaca
+	 * @param PW Prawdopodobienstwo przedawkowania welociraptora
+	 * @param E Ilosc epok symulacji
+	 */
 	protected static void sprawdzenie_ustawien(int X,int Z,int W,int O,int D,int P, int PZ, int PW, int E) {
 		if(X<10 || X>40) {
 			System.out.println("Niepoprawna wartosc X: "+X);
@@ -25,7 +42,7 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 			System.out.println("Niepoprawna wartosc W: "+W);
 			 System.exit(0);
 		}
-		if(O<0 || O>X) {
+		if(O<0 || O>(X*X)/2) {
 			System.out.println("Niepoprawna wartosc O: "+O);
 			 System.exit(0);
 		}
@@ -52,6 +69,11 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 	}
 
 
+	/**
+	 * Metoda wypelnieniajaca tablice symulacji obiektami klasy Puste
+	 * @param X Rozmiar siatki symulacji
+	 * @param map Tablica symulacji o rozmiarze [X+2][X+2]
+	 */
 	protected static void ustawianie_mapy(int X,Mapa[][] map) {	// USTAWIENIE WSZYSTKICH PUL NA PUSTE
 		for(int i=0;i<X+2;i++) {
 			for(int j=0;j<X+2;j++) {
@@ -60,6 +82,11 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 		}
 	}
 
+	/**
+	 * Metoda wypelnieniajaca tabrzegi tablicy symulacji obiektami klasy Ogrodzenie
+	 * @param X Rozmiar siatki symulacji
+	 * @param map Tablica symulacji o rozmiarze [X+2][X+2]
+	 */
 	protected static void budowa_ogrodzenia(int X,Mapa[][] map) {	//USTAWIENIE WSZYSTKICH POL OBRZEZNYCH NA OGRODZENIE
 		for(int k=0;k<X+2;k+=X+1) {
 			for(int i=0;i<X+2;i++) {
@@ -74,6 +101,12 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 	}
 	}
 
+	/**
+	 * Metoda ustawiajaca w losowym miejscu mapy terytorium wiedzmy o wielkosci DxD
+	 * @param X Rozmiar siatki symulacji
+	 * @param D Dlugosc boku kwadratu terytorium wiedzmy
+	 * @param map Tablica symulacji o rozmiarze [X+2][X+2]
+	 */
 	protected static void ustawianie_domu_wiedzmy (int X,int D,Mapa[][] map) {	//USTAWIENIE DOMU WIEDZMY W LOSOWYM MIEJSCU
 		int miejsceY=-100;
 		int miejsceX=-100;
@@ -95,6 +128,12 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 		}
 	}
 
+	/**
+	 * Metoda ustawiajaca w losowym miejscu mapy O krzewow rozkoszy
+	 * @param X Rozmiar siatki symulacji
+	 * @param O Poczatkowa ilosc krzewow rozkoszy
+	 * @param map Tablica symulacji o rozmiarze [X+2][X+2]
+	 */
 	protected static void ustawianie_owocow (int X,int O,Mapa[][] map) {	//USTAWIENIE KRZEWOW ROZKOSZY W LOSOWYM MIEJSCU
 		int miejsceY=-100;
 		int miejsceX=-100;
@@ -112,6 +151,12 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 
 	}
 
+	/**
+	 * Metoda ustawiajaca w losowym miejscu mapy Z zajacow
+	 * @param X Rozmiar siatki symulacji
+	 * @param Z Poczatkowa ilosc zajacow
+	 * @param map Tablica symulacji o rozmiarze [X+2][X+2]
+	 */
 	protected static void ustawianie_zajacow (int X,int Z,Mapa[][] map) {	//USTAWIENIE ZAJACOW W LOSOWYM MIEJSCU											
 		int miejsceY=-100;
 		int miejsceX=-100;
@@ -128,6 +173,12 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 	}
 
 
+	/**
+	 * Metoda ustawiajaca w losowym miejscu mapy W welociraptorow
+	 * @param X Rozmiar siatki symulacji
+	 * @param W Poczatkowa ilosc welociraptorow
+	 * @param map Tablica symulacji o rozmiarze [X+2][X+2]
+	 */
 	protected static void ustawianie_welociraptorow (int X,int Z,Mapa[][] map) {	//USTAWIENIE WELOCIRAPTOROW W LOSOWYM MIEJSCU
 		int miejsceY=-100;
 		int miejsceX=-100;
@@ -145,6 +196,15 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 
 
 
+	/**
+	 * Metoda wywolujaca w odpowiedniej kolejnosci wszystkie niezbedne metody odpowiedzialne za zainicjalizowanie poczatkowej siatki symulacji
+	 * @param map Tablica symulacji o rozmiarze [X+2][X+2]
+	 * @param X Rozmiar siatki symulacji
+	 * @param Z Poczatkowa ilosc zajacow
+	 * @param W Poczatkowa ilosc welociraptorow
+	 * @param O Poczatkowa ilosc krzewow rozkoszy
+	 * @param D Dlugosc boku kwadratu terytorium wiedzmy
+	 */
 	protected static void ustawienie_poczatkowe(Mapa[][] map,int X,int Z,int W,int O,int D) {	// FUNKCJA LACZACA POPRZEDNIE W JEDNA
 
 		ustawianie_mapy(X,map);
@@ -158,6 +218,12 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 	}
 
 
+	/**
+	 * Metoda uaktualniajaca dane zawarte w obiekcie klasy Zliczanie
+	 * @param map Tablica symulacji o rozmiarze [X+2][X+2]
+	 * @param X Rozmiar siatki symulacji
+	 * @param ilosc Obiekt klasy ZLiczanie w ktorym maja zostac zaktualizowane dane
+	 */
 	protected static void stan_aktualny(Mapa[][] map, int X, Zliczanie ilosc) { 				// FUNKCJA AKTUALIZUJACA INFORMACJE O LICZEBNOSCI
 		for(int i=0;i<X+2;i++) {																//	W OBIEKCIE KLASY ZLICZANIE
 			for(int j=0;j<X+2;j++) {
@@ -177,6 +243,10 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 		}
 	}
 
+	/**
+	 * Metoda wstrzymujaca dalsze dzialanie programu
+	 * @param X Ilosc czasu oczekiwania w milisekundach
+	 */
 	protected static void czekaj(int X) {													// FUNKCJA OPOZNIAJACA DALSZE WYKONANIA
         try{
             Thread.sleep(X);
@@ -184,12 +254,23 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
         catch(Exception e){} 
 	}
 	
+	/**
+	 * Metoda odpowiedzialna za przewijanie konsoli w celu wywolania zludzenia symulacji (aktualnie nieuzywana)
+	 */
 	protected static void przewijanie() {													// FUNKCJA PRZEWIJAJACA KONSOLE (DO SYMULOWANIA W KONSOLI)
 	    for(int i=0; i<25; ++i)
 	        System.out.println();
 	    System.out.flush();
 	}
 
+	/**
+	 * Metoda odpowiedzialna za uzupelnienie JTextPane w celu pozniejszego wyswietlania symulacji
+	 * @param map Tablica symulacji o rozmiarze [X+2][X+2]
+	 * @param X Rozmiar siatki symulacji
+	 * @param nr_epoki Numer aktualnie przeprowadzanego kroku-epoki symulacji
+	 * @param pane Obiekt klasy JTextPane, ktory wyswietla aktualne polozenie agentow na mapie
+	 * @return
+	 */
 	protected static Zliczanie wyswietlenie_mapy(Mapa[][] map, int X, int nr_epoki, JTextPane pane) { //wyswietlanie mapy zwraca zliczanie, co pomaga w tworzeniu wykresu
 		Zliczanie stan=new Zliczanie();																					// tworzy rowniez na biezaco text pane
 
@@ -217,6 +298,12 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 	}
 
 	
+	/**
+	 * Metoda zamienajaca obiekty pomocnicze dla klasy Zajac na obiekty wlasciwe
+	 * @param map Tablica symulacji o rozmiarze [X+2][X+2]
+	 * @param X Rozmiar siatki symulacji
+	 * @param co parametr okreslajacy ktory buffor zamieniac
+	 */
 	protected static void UnBuffZajaca(Mapa[][]map,int X,int co) {
 		for(int i=1;i<X+1;i++) {
 			for(int j=1;j<X+1;j++) {
@@ -230,6 +317,12 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 		}
 	}
 	
+	/**
+	 * Metoda zamienajaca obiekty pomocnicze dla klasy Welociraptor na obiekty wlasciwe
+	 * @param map Tablica symulacji o rozmiarze [X+2][X+2]
+	 * @param X Rozmiar siatki symulacji
+	 * @param co parametr okreslajacy ktory buffor zamieniac
+	 */
 	protected static void UnBuffWelociraptora(Mapa[][]map,int X,int co) {
 		for(int i=1;i<X+1;i++) {
 			for(int j=1;j<X+1;j++) {
@@ -243,6 +336,11 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 		}
 	}
 
+	/**
+	 * @param pane Obiekt klasy JTextPane, ktory wyswietla aktualne polozenie agentow na mapie
+	 * @param text Symbol, ktory ma byc dodany do JTextPane
+	 * @param color Kolor symbolu, ktory ma byc dodany do JTextPane
+	 */
 	public static void addText(JTextPane pane, String text,Color color){
 		StyledDocument doc = pane.getStyledDocument();
 		Style style = pane.addStyle("Color Style",null);
