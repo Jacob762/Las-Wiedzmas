@@ -57,7 +57,6 @@ public static void Start(int X, int Z, int W, int O, int D, int P, int PZ, int P
 	f.setBackground(Color.WHITE);
 	JTextPane pane = new JTextPane();
 	f.add(pane);
-	f.setLayout(new FlowLayout());
 	f.setVisible(true);
 
 
