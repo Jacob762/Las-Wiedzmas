@@ -4,6 +4,10 @@ import java.util.Random;
 
 //KLASA Zajac JEST UMIEJSCOWIONA POZA KLASA Klasy ZE WZGLEDU NA ROZMIAR 
 
+/**
+ * Obiekty tej klasy sa umieszczane na siatce symulacji
+ *
+ */
 class Zajac extends Ruchome{
 
 	@Override
@@ -16,10 +20,10 @@ class Zajac extends Ruchome{
 				}
 			}
 		}
-		if(ile_pustych>=ilosc) {
+		if(ile_pustych>=0) {
 			return true;
 		}
-		else	return false;
+		else return false;
 	}
 
 	@Override

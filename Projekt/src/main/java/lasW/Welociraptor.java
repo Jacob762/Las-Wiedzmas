@@ -4,6 +4,10 @@ import java.util.Random;
 
 //KLASA Welociraptor JEST UMIEJSCOWIONA POZA KLASA Klasy ZE WZGLEDU NA ROZMIAR 
 
+/**
+ * Obiekty tej klasy sa umieszczane na siatce symulacji
+ *
+ */
 class Welociraptor extends Ruchome{
 
 	@Override

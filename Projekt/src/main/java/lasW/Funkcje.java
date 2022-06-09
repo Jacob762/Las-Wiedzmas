@@ -10,11 +10,11 @@ import java.util.Random;
 
 
 /**
- * Klasa zawierajaca funkcje wykorzystywane w programie
+ * Klasa zawierajaca funkcje wykorzystywane przez pozosta³e klasy
  * @author Nowaczyk/Klawon
  *
  */
-public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTALE KLASY W PAKIECIE
+public class Funkcje {
 
 	/**
 	 * Metoda sprawdzajaca czy ustawienia sa poprawne (zgodne z wymaganiami zawartymi w tebeli z opisu projektu w jezyku naturalnym)
@@ -74,7 +74,7 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 	 * @param X Rozmiar siatki symulacji
 	 * @param map Tablica symulacji o rozmiarze [X+2][X+2]
 	 */
-	protected static void ustawianie_mapy(int X,Mapa[][] map) {	// USTAWIENIE WSZYSTKICH PUL NA PUSTE
+	protected static void ustawianie_mapy(int X,Mapa[][] map) {
 		for(int i=0;i<X+2;i++) {
 			for(int j=0;j<X+2;j++) {
 				map[i][j]=new Puste();
@@ -87,7 +87,7 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 	 * @param X Rozmiar siatki symulacji
 	 * @param map Tablica symulacji o rozmiarze [X+2][X+2]
 	 */
-	protected static void budowa_ogrodzenia(int X,Mapa[][] map) {	//USTAWIENIE WSZYSTKICH POL OBRZEZNYCH NA OGRODZENIE
+	protected static void budowa_ogrodzenia(int X,Mapa[][] map) {
 		for(int k=0;k<X+2;k+=X+1) {
 			for(int i=0;i<X+2;i++) {
 			map[k][i]=new Ogrodzenie();
@@ -107,7 +107,7 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 	 * @param D Dlugosc boku kwadratu terytorium wiedzmy
 	 * @param map Tablica symulacji o rozmiarze [X+2][X+2]
 	 */
-	protected static void ustawianie_domu_wiedzmy (int X,int D,Mapa[][] map) {	//USTAWIENIE DOMU WIEDZMY W LOSOWYM MIEJSCU
+	protected static void ustawianie_domu_wiedzmy (int X,int D,Mapa[][] map) {
 		int miejsceY=-100;
 		int miejsceX=-100;
 		Random los = new Random();
@@ -134,7 +134,7 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 	 * @param O Poczatkowa ilosc krzewow rozkoszy
 	 * @param map Tablica symulacji o rozmiarze [X+2][X+2]
 	 */
-	protected static void ustawianie_owocow (int X,int O,Mapa[][] map) {	//USTAWIENIE KRZEWOW ROZKOSZY W LOSOWYM MIEJSCU
+	protected static void ustawianie_owocow (int X,int O,Mapa[][] map) {
 		int miejsceY=-100;
 		int miejsceX=-100;
 		Random los = new Random();
@@ -157,7 +157,7 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 	 * @param Z Poczatkowa ilosc zajacow
 	 * @param map Tablica symulacji o rozmiarze [X+2][X+2]
 	 */
-	protected static void ustawianie_zajacow (int X,int Z,Mapa[][] map) {	//USTAWIENIE ZAJACOW W LOSOWYM MIEJSCU											
+	protected static void ustawianie_zajacow (int X,int Z,Mapa[][] map) {										
 		int miejsceY=-100;
 		int miejsceX=-100;
 		Random los = new Random();
@@ -179,7 +179,7 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 	 * @param W Poczatkowa ilosc welociraptorow
 	 * @param map Tablica symulacji o rozmiarze [X+2][X+2]
 	 */
-	protected static void ustawianie_welociraptorow (int X,int Z,Mapa[][] map) {	//USTAWIENIE WELOCIRAPTOROW W LOSOWYM MIEJSCU
+	protected static void ustawianie_welociraptorow (int X,int Z,Mapa[][] map) {
 		int miejsceY=-100;
 		int miejsceX=-100;
 		Random los = new Random();
@@ -205,7 +205,7 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 	 * @param O Poczatkowa ilosc krzewow rozkoszy
 	 * @param D Dlugosc boku kwadratu terytorium wiedzmy
 	 */
-	protected static void ustawienie_poczatkowe(Mapa[][] map,int X,int Z,int W,int O,int D) {	// FUNKCJA LACZACA POPRZEDNIE W JEDNA
+	protected static void ustawienie_poczatkowe(Mapa[][] map,int X,int Z,int W,int O,int D) {
 
 		ustawianie_mapy(X,map);
 		budowa_ogrodzenia(X,map);
@@ -224,8 +224,8 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 	 * @param X Rozmiar siatki symulacji
 	 * @param ilosc Obiekt klasy ZLiczanie w ktorym maja zostac zaktualizowane dane
 	 */
-	protected static void stan_aktualny(Mapa[][] map, int X, Zliczanie ilosc) { 				// FUNKCJA AKTUALIZUJACA INFORMACJE O LICZEBNOSCI
-		for(int i=0;i<X+2;i++) {																//	W OBIEKCIE KLASY ZLICZANIE
+	protected static void stan_aktualny(Mapa[][] map, int X, Zliczanie ilosc) { 				
+		for(int i=0;i<X+2;i++) {																
 			for(int j=0;j<X+2;j++) {
 				if(map[i][j] instanceof Zajac) {
 					ilosc.zajace++;
@@ -247,21 +247,13 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 	 * Metoda wstrzymujaca dalsze dzialanie programu
 	 * @param X Ilosc czasu oczekiwania w milisekundach
 	 */
-	protected static void czekaj(int X) {													// FUNKCJA OPOZNIAJACA DALSZE WYKONANIA
+	protected static void czekaj(int X) {													
         try{
             Thread.sleep(X);
         }
         catch(Exception e){} 
 	}
 	
-	/**
-	 * Metoda odpowiedzialna za przewijanie konsoli w celu wywolania zludzenia symulacji (aktualnie nieuzywana)
-	 */
-	protected static void przewijanie() {													// FUNKCJA PRZEWIJAJACA KONSOLE (DO SYMULOWANIA W KONSOLI)
-	    for(int i=0; i<25; ++i)
-	        System.out.println();
-	    System.out.flush();
-	}
 
 	/**
 	 * Metoda odpowiedzialna za uzupelnienie JTextPane w celu pozniejszego wyswietlania symulacji
@@ -271,8 +263,8 @@ public class Funkcje {	// KLASA ZAWIERAJACA FUNKCJE Z KTORYCH KORZYSTAJA POZOSTA
 	 * @param pane Obiekt klasy JTextPane, ktory wyswietla aktualne polozenie agentow na mapie
 	 * @return
 	 */
-	protected static Zliczanie wyswietlenie_mapy(Mapa[][] map, int X, int nr_epoki, JTextPane pane) { //wyswietlanie mapy zwraca zliczanie, co pomaga w tworzeniu wykresu
-		Zliczanie stan=new Zliczanie();																					// tworzy rowniez na biezaco text pane
+	protected static Zliczanie wyswietlenie_mapy(Mapa[][] map, int X, int nr_epoki, JTextPane pane) { 
+		Zliczanie stan=new Zliczanie();																				
 
 		
 		for(int i=0;i<X+2;i++) {

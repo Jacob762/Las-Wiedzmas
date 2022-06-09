@@ -2,8 +2,19 @@ package lasW;
 
 import java.util.Random;
 
-// KLASA Klasy JEST ODPOWIEDZIALNA ZA DZIEDZICZENIE
 
+/**
+ * Klasa odpowiedzialna za implementacje klas
+ *
+ */
+
+
+
+
+/**
+ * Klasa odpowiedzialana za przechowywanie informacji o ilosci poszczegolnych agentow
+ *
+ */
 class Zliczanie{	// KLASA ODPOWIEDZIALANA ZA PRZECHOWYWANIE ILIOSCI AGENTOW
 
 	protected int zajace;
@@ -29,12 +40,22 @@ class Zliczanie{	// KLASA ODPOWIEDZIALANA ZA PRZECHOWYWANIE ILIOSCI AGENTOW
 }
 
 
+
+/**
+ * Klasa Mapa jest klasa matka wszystkich klas wykorzystywanych w symulacji. Wszystkie obiekty klas na symulacji musza miec swoje oznaczenie
+ *
+ */
 class Mapa {
 
 	protected String symbol;
 
 }
 
+
+/**
+ * Obiekty tej klasy wyznaczaja granice siatki symulacji
+ *
+ */
 class Ogrodzenie extends Mapa{
 
 	Ogrodzenie(){
@@ -42,6 +63,11 @@ class Ogrodzenie extends Mapa{
 	}
 }
 
+
+/**
+ * Obiekty tej klasy reprezentuja puste miejsce w siatce symulacji (Puste - dostepne)
+ *
+ */
 class Puste extends Mapa{
 	Puste(){
 		symbol=new String(Character.toChars(0x1F331));
@@ -49,6 +75,12 @@ class Puste extends Mapa{
 
 }
 
+
+
+/**
+ * Obiekty klasy wiedzma wyznaczaja teren wiedzmy na siatce symulacji
+ *
+ */
 class Wiedzma extends Mapa{
 	Wiedzma(){
 		symbol=new String(Character.toChars(0x1F480));
@@ -68,24 +100,41 @@ class Wiedzma extends Mapa{
 	}
 }
 
+
+/**
+ * Klasa pomocnicza 
+ *
+ */
 class BuforZajaca extends Mapa{
 	BuforZajaca(){
 		symbol="B";
 	}
 }
 
+/**
+ * Klasa pomocnicza 
+ *
+ */
 class BuforWelociraptora extends Mapa{
 	BuforWelociraptora(){
 		symbol="V";
 	}
 }
 
+/**
+ * Klasa pomocnicza 
+ *
+ */
 class NajedzonyZajac extends Mapa{
 	NajedzonyZajac(){
 		symbol="@";
 	}
 }
 
+/**
+ * Klasa pomocnicza 
+ *
+ */
 class NajedzonyWelociraptor extends Mapa{
 	NajedzonyWelociraptor(){
 		symbol="#";
@@ -93,6 +142,10 @@ class NajedzonyWelociraptor extends Mapa{
 }
 
 
+/**
+ * Abstrakcyjna klasa dziedziczaca po mapie.
+ *
+ */
 abstract class Rozmnazalne extends Mapa{
 	abstract boolean czy_miejsce_na_rozmnozenie(int Rozmiar, Mapa[][] x, int ilsoc);
 
@@ -101,7 +154,10 @@ abstract class Rozmnazalne extends Mapa{
 }
 
 
-
+/**
+ * Abstrakcyjna klasa dziedziczaca po mapie.
+ *
+ */
 abstract class Ruchome extends Rozmnazalne{
 	protected int ilosc_ruchow;
 	abstract boolean czy_ruch(int y, int x, Mapa[][] map);

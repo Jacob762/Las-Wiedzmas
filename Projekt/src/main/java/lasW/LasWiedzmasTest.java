@@ -7,7 +7,6 @@ import java.io.PrintWriter;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
-// KLASA WYKONUJACA TESTY JEDNOSTKOWE
 /**
  * Klasa zawierajaca testy jednostkowe
  * @author Nowaczyk/Klawon
@@ -26,7 +25,7 @@ class LasWiedzmasTest {
 	 * Test poprawnej implementacji pustej siatki - sprawdza czy tworzy sie odpowiedni rozmiar i czy wszedzie sa obiekty klasy Puste
 	 */
 	@Test
-	void test_poprawnej_implementacji_pustej_siatki() {	// SPRAWDZENIE CZY TWORZY ODPOWIEDNIA WIELKOSC SIATKI I WYPELNIA PUSTYMI ELEMENTAMI
+	void test_poprawnej_implementacji_pustej_siatki() {
 		Random los=new Random();
 	int X= los.nextInt(1000-10)+11;
 	int ilosc=0;
@@ -46,7 +45,7 @@ class LasWiedzmasTest {
 	 * Test poprawnej implementacji ogrodznia- sprawdza czy obiekty klasy Ogrodzenie sa ustawiane w poprawnej ilosci i miejscu
 	 */
 	@Test
-	void test_poprawnej_implementacji_ogrodzenia() {	// SPRAWDZENIE CZY POPRAWNIE TWORZY OGRODZNIE
+	void test_poprawnej_implementacji_ogrodzenia() {
 		Random los=new Random();
 	int X= los.nextInt(1000-10)+11;
 	int ilosc=0;
@@ -60,7 +59,7 @@ class LasWiedzmasTest {
 			}
 		}
 	}
-	Assert.assertEquals(ilosc,2*(X+2)+2*X);	// CZY ODPOWIEDNIA ILOSC ELEMENTOW
+	Assert.assertEquals(ilosc,2*(X+2)+2*X);
 
 	ilosc=0;
 	for(int i=1;i<X+1;i++) {
@@ -70,7 +69,7 @@ class LasWiedzmasTest {
 			}
 		}
 	}
-	Assert.assertEquals(0,ilosc);	// CZY W ODPOWIEDNIM MIEJSCU
+	Assert.assertEquals(0,ilosc);
 
 
 }
@@ -80,7 +79,7 @@ class LasWiedzmasTest {
 	 * Test poprawnej implementacji agentow- sprawdza czy obiekty klasy Zajac i Welociraptor sa dodawane w odpowiednim miejscu i ilosci
 	 */
 	@Test
-	void test_poprawnej_implementacji_agentow() {	// SPRAWDZENIE CZY OBSADZA AGENTOW W DOBRYM MIEJSCU I ILOSCI
+	void test_poprawnej_implementacji_agentow() {
 		Zliczanie stan=new Zliczanie();
 		Random los=new Random();
 		int X,Z,W,O,D;
@@ -96,7 +95,7 @@ class LasWiedzmasTest {
 		Assert.assertEquals(powinno_byc.zajace,stan.zajace);
 		Assert.assertEquals(powinno_byc.dom_wiedzmy,stan.dom_wiedzmy);
 		Assert.assertEquals(powinno_byc.welociraptory,stan.welociraptory);
-		Assert.assertEquals(powinno_byc.krzewy_rozkoszy,stan.krzewy_rozkoszy);	// KONIEC SPRAWDZANIA ILOSCI
+		Assert.assertEquals(powinno_byc.krzewy_rozkoszy,stan.krzewy_rozkoszy);
 
 		int ilosc=0;
 
@@ -116,7 +115,7 @@ class LasWiedzmasTest {
 		}
 	}
 
-		Assert.assertEquals(0,ilosc);	// SPRAWDZAMY CZY W DOBRYM MIEJSCU (JEZELI BY BYL AGENT W OGRODZENIU TO ZLE)
+		Assert.assertEquals(0,ilosc);
 }
 	
 	
@@ -124,7 +123,7 @@ class LasWiedzmasTest {
 	 * Test poprawnego wybuchu terytorium wiedzmy
 	 */
 	@Test
-	void test_wybuchu_domu_wiedzmy(){	// SPRAWDZAMY CZY TERYTORIUM WIEDZMY POPRAWNIE WYBUCHA
+	void test_wybuchu_domu_wiedzmy(){
 		Random los=new Random();
 		int X= los.nextInt(1000-10)+11;
 		Mapa[][] mapa = new Mapa[X+2][X+2];
@@ -143,7 +142,7 @@ class LasWiedzmasTest {
 	 * Test poprawnego przedawkowania agentow
 	 */
 	@Test
-	void test_przedawkowania(){			// SPRAWDZAMY CZY ZAJACE I WELOCIRAPTORY UMIERAJA Z PRZEDAWKOWANIA
+	void test_przedawkowania(){
 		Zliczanie stan=new Zliczanie();
 		Random los=new Random();
 		int X,Z,W,O,D;
@@ -177,7 +176,7 @@ class LasWiedzmasTest {
 	 * Test odrastania krzewow
 	 */
 	@Test
-	void test_odrastania_krzewow() {					//SPRAWDZANIE CZY KRZEWY ODRASTAJA
+	void test_odrastania_krzewow() {
 		
 		Zliczanie stan=new Zliczanie();
 		Random los=new Random();
@@ -211,7 +210,7 @@ class LasWiedzmasTest {
 	 * Test poprawnego przemieszczania sie zajaca
 	 */
 	@Test
-	void test_ruchu_zajaca() {						//SPRAWDZANIE CZY ZAJAC SIE PRZEMIESZCZAJA
+	void test_ruchu_zajaca() {						
 		
 		//POZYCJA POCZATKOWA I KONCOWA
 		int Yp=-1,Yk=-1,Xp=-1,Xk=-1;
@@ -263,7 +262,7 @@ class LasWiedzmasTest {
 	 * Test poprawnego przemieszczania sie welociraptora
 	 */
 	@Test
-	void test_ruchu_welociraptora() {						//SPRAWDZANIE CZY WELOCIRAPTORY SIE PRZEMIESZCZAJA
+	void test_ruchu_welociraptora() {
 		
 		//POZYCJA POCZATKOWA I KONCOWA
 		int Yp=-1,Yk=-1,Xp=-1,Xk=-1;
@@ -314,7 +313,7 @@ class LasWiedzmasTest {
 	 * Test poprawnego zjadania owocu - obsadzenie krzewu rozkoszy i zajaca przy sobie w celu sprawdzenia czy w jednym ruchu zje owoc
 	 */
 	@Test
-	void test_zjadania_owocu() {						//SPRAWDZANIE CZY ZAJAC ZJE OWOC
+	void test_zjadania_owocu() {
 		
 		
 		Zliczanie stan=new Zliczanie();
@@ -337,7 +336,8 @@ class LasWiedzmasTest {
 	 * Test poprawnego zjadania zajaca - obsadzenie welociraptora i zajaca przy sobie w celu sprawdzenia czy w jednym ruchu zajac zostanie zjedzony
 	 */
 	@Test
-	void test_zjadania_zajaca() {						//SPRAWDZANIE CZY WELOCIRAPTOR ZJE ZAJACA
+	void test_zjadania_zajaca() {
+		//Tworzy siatke 2x2 i umieszcza w niej welociraptora i zajaca. Jezeli zjadanie dziala poprawnie to zajac zginie w 1 epoce
 		Zliczanie stan=new Zliczanie();
 		int X,Z,W,O,D;
 		 X=2;

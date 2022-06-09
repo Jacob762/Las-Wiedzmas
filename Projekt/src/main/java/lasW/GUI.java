@@ -19,20 +19,20 @@ import static lasW.LasWiedzmas.E;
 
 
 /**
- * Klasa odpowiadajaca za GUI
+ * Glowna klasa programu, zawiera main. Tworzy GUI.
  * @author Nowaczyk/Klawon
  *
  */
 
-public class GUI implements ActionListener{//GLOWNA KLASA PROGRAMU ODPOWIEDZIALNA ZA STEROWANIE PROGRAMEM W SPOSOB GRAFICZNY
+public class GUI implements ActionListener{
 	
 	/**
 	 * 
-	 * glowna metoda rozpoczynajaca program - otwiera MENU glowne GUI
+	 * Glowna metoda rozpoczynajaca program - otwiera MENU glowne GUI
 	 * @param args Tablica argumentow metody main
 	 * @throws FileNotFoundException Wyjatek nie istnienia pliku
 	 */
-	public static void main (String[]args) throws FileNotFoundException {	// KLASA MAIN ROZPOCZYNAJACA PROGRAM
+	public static void main (String[]args) throws FileNotFoundException {	
 		new GUI(0);
 	}
 

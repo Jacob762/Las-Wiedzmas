@@ -5,7 +5,7 @@ package lasW;
  * @author Nowaczyk/Klawon
  *
  */
-public interface Epoka {	// INTERFEJS PRZEBIEGU KROKOW EPOKI
+public interface Epoka {	
     /**
      * Metoda odpowiedzialna za wybuch terytorium wiedzmy
      * @param X Rozmiar siatki symulacji

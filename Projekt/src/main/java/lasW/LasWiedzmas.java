@@ -28,6 +28,7 @@ public class LasWiedzmas {
 	static int PW = 5;			//SZANSA NA PRZEDAWKOWANIE WELOCIRAPTOROW W %
 	static int E = 10;			//ILOSC EPOK
 	///////////////////
+	
 	static Zliczanie sTan;
 
 
@@ -47,7 +48,7 @@ public class LasWiedzmas {
  * @param E Ilosc epok symulacji
  * @throws FileNotFoundException Wyjatek nie istnienia pliku
  */
-public static void Start(int X, int Z, int W, int O, int D, int P, int PZ, int PW, int E) throws FileNotFoundException{ // FUNKCJA ODPOWIEDZIALNA ZA SYMULACJE
+public static void Start(int X, int Z, int W, int O, int D, int P, int PZ, int PW, int E) throws FileNotFoundException{
 
 
 	
@@ -69,7 +70,7 @@ public static void Start(int X, int Z, int W, int O, int D, int P, int PZ, int P
 			Mapa[][] mapa = new Mapa[X+2][X+2];
 
 			Funkcje.ustawienie_poczatkowe(mapa,X,Z,W,O,D);
-			System.out.println("Epoka;Zajac;Welociraptor;Krzewy_rozkoszy:Terytorium_wiedzmy");
+			System.out.println("Epoka;Zajac;Welociraptor;Krzewy_rozkoszy;Terytorium_wiedzmy");
 			Funkcje.wyswietlenie_mapy(mapa, X,0,pane);
 			XYChart chart = new XYChartBuilder().height(600).width(400).title("Wykres").xAxisTitle("Epoka").yAxisTitle("Stworzenie").build(); //TWORZENIE WYKRESU
 			ArrayList<Integer> listaE = new ArrayList<>();
